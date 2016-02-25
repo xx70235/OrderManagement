@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPOrderStateFeedbackService" targetNamespace="http://common.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="commonProductStateFeedback" type="tns:commonProductStateFeedback" />
+      <xs:element name="commonProductStateFeedbackResponse" type="tns:commonProductStateFeedbackResponse" />
+      <xs:complexType name="commonProductStateFeedback">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commonProductStateFeedbackResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="commonProductStateFeedback">
+    <wsdl:part name="parameters" element="tns:commonProductStateFeedback" />
+  </wsdl:message>
+  <wsdl:message name="commonProductStateFeedbackResponse">
+    <wsdl:part name="parameters" element="tns:commonProductStateFeedbackResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICPOrderStateFeedback">
+    <wsdl:operation name="commonProductStateFeedback">
+      <wsdl:input name="commonProductStateFeedback" message="tns:commonProductStateFeedback" />
+      <wsdl:output name="commonProductStateFeedbackResponse" message="tns:commonProductStateFeedbackResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPOrderStateFeedbackServiceSoapBinding" type="tns:ICPOrderStateFeedback">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="commonProductStateFeedback">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="commonProductStateFeedback">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="commonProductStateFeedbackResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPOrderStateFeedbackService">
+    <wsdl:port name="CPOrderStateFeedbackPort" binding="tns:CPOrderStateFeedbackServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPOrderStateFeedbackService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

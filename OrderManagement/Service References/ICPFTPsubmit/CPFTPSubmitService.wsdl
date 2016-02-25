@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPFTPSubmitService" targetNamespace="http://common.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="commonProductSubmit" type="tns:commonProductSubmit" />
+      <xs:element name="commonProductSubmitResponse" type="tns:commonProductSubmitResponse" />
+      <xs:complexType name="commonProductSubmit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commonProductSubmitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="commonProductSubmitResponse">
+    <wsdl:part name="parameters" element="tns:commonProductSubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="commonProductSubmit">
+    <wsdl:part name="parameters" element="tns:commonProductSubmit" />
+  </wsdl:message>
+  <wsdl:portType name="ICPFTPSubmit">
+    <wsdl:operation name="commonProductSubmit">
+      <wsdl:input name="commonProductSubmit" message="tns:commonProductSubmit" />
+      <wsdl:output name="commonProductSubmitResponse" message="tns:commonProductSubmitResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPFTPSubmitServiceSoapBinding" type="tns:ICPFTPSubmit">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="commonProductSubmit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="commonProductSubmit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="commonProductSubmitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPFTPSubmitService">
+    <wsdl:port name="CPFTPSubmitPort" binding="tns:CPFTPSubmitServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPFTPSubmitService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

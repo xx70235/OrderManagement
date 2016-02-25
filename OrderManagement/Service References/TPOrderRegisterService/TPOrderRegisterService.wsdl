@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://thematic.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="TPOrderRegisterService" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="thematicProductOrderRegister" type="tns:thematicProductOrderRegister" />
+      <xs:element name="thematicProductOrderRegisterResponse" type="tns:thematicProductOrderRegisterResponse" />
+      <xs:complexType name="thematicProductOrderRegister">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="thematicProductOrderRegisterResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="thematicProductOrderRegisterResponse">
+    <wsdl:part name="parameters" element="tns:thematicProductOrderRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="thematicProductOrderRegister">
+    <wsdl:part name="parameters" element="tns:thematicProductOrderRegister" />
+  </wsdl:message>
+  <wsdl:portType name="ITPOrderRegister">
+    <wsdl:operation name="thematicProductOrderRegister">
+      <wsdl:input name="thematicProductOrderRegister" message="tns:thematicProductOrderRegister" />
+      <wsdl:output name="thematicProductOrderRegisterResponse" message="tns:thematicProductOrderRegisterResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPOrderRegisterServiceSoapBinding" type="tns:ITPOrderRegister">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="thematicProductOrderRegister">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="thematicProductOrderRegister">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="thematicProductOrderRegisterResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPOrderRegisterService">
+    <wsdl:port name="TPOrderRegisterPort" binding="tns:TPOrderRegisterServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/TPOrderRegisterService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

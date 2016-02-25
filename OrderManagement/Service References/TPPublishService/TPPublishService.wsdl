@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://thematic.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="TPPublishService" targetNamespace="http://thematic.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://thematic.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="thematicProductsPublish" type="tns:thematicProductsPublish" />
+      <xs:element name="thematicProductsPublishResponse" type="tns:thematicProductsPublishResponse" />
+      <xs:complexType name="thematicProductsPublish">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="thematicProductsPublishResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="thematicProductsPublish">
+    <wsdl:part name="parameters" element="tns:thematicProductsPublish" />
+  </wsdl:message>
+  <wsdl:message name="thematicProductsPublishResponse">
+    <wsdl:part name="parameters" element="tns:thematicProductsPublishResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITPPublish">
+    <wsdl:operation name="thematicProductsPublish">
+      <wsdl:input name="thematicProductsPublish" message="tns:thematicProductsPublish" />
+      <wsdl:output name="thematicProductsPublishResponse" message="tns:thematicProductsPublishResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPPublishServiceSoapBinding" type="tns:ITPPublish">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="thematicProductsPublish">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="thematicProductsPublish">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="thematicProductsPublishResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPPublishService">
+    <wsdl:port name="TPPublishPort" binding="tns:TPPublishServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/TPPublishService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

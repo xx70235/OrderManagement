@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPStateFeedbackService" targetNamespace="http://common.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="state" type="tns:state" />
+      <xs:element name="stateResponse" type="tns:stateResponse" />
+      <xs:complexType name="state">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="stateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="stateResponse">
+    <wsdl:part name="parameters" element="tns:stateResponse" />
+  </wsdl:message>
+  <wsdl:message name="state">
+    <wsdl:part name="parameters" element="tns:state" />
+  </wsdl:message>
+  <wsdl:portType name="ICPStateFeedback">
+    <wsdl:operation name="state">
+      <wsdl:input name="state" message="tns:state" />
+      <wsdl:output name="stateResponse" message="tns:stateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPStateFeedbackServiceSoapBinding" type="tns:ICPStateFeedback">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="state">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="state">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="stateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPStateFeedbackService">
+    <wsdl:port name="CPStateFeedbackPort" binding="tns:CPStateFeedbackServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPStateFeedbackService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

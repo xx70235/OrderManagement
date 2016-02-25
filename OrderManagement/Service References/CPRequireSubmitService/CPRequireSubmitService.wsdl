@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPRequireSubmitService" targetNamespace="http://common.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="commonProductRequireSubmit" type="tns:commonProductRequireSubmit" />
+      <xs:element name="commonProductRequireSubmitResponse" type="tns:commonProductRequireSubmitResponse" />
+      <xs:complexType name="commonProductRequireSubmit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commonProductRequireSubmitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="commonProductRequireSubmitResponse">
+    <wsdl:part name="parameters" element="tns:commonProductRequireSubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="commonProductRequireSubmit">
+    <wsdl:part name="parameters" element="tns:commonProductRequireSubmit" />
+  </wsdl:message>
+  <wsdl:portType name="ICPRequireSubmit">
+    <wsdl:operation name="commonProductRequireSubmit">
+      <wsdl:input name="commonProductRequireSubmit" message="tns:commonProductRequireSubmit" />
+      <wsdl:output name="commonProductRequireSubmitResponse" message="tns:commonProductRequireSubmitResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPRequireSubmitServiceSoapBinding" type="tns:ICPRequireSubmit">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="commonProductRequireSubmit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="commonProductRequireSubmit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="commonProductRequireSubmitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPRequireSubmitService">
+    <wsdl:port name="CPRequireSubmitPort" binding="tns:CPRequireSubmitServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPRequireSubmitService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://thematic.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="TPStateFeedbackService" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="thematicProductStateFeedback" type="tns:thematicProductStateFeedback" />
+      <xs:element name="thematicProductStateFeedbackResponse" type="tns:thematicProductStateFeedbackResponse" />
+      <xs:complexType name="thematicProductStateFeedback">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="thematicProductStateFeedbackResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="thematicProductStateFeedbackResponse">
+    <wsdl:part name="parameters" element="tns:thematicProductStateFeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="thematicProductStateFeedback">
+    <wsdl:part name="parameters" element="tns:thematicProductStateFeedback" />
+  </wsdl:message>
+  <wsdl:portType name="ITPStateFeedback">
+    <wsdl:operation name="thematicProductStateFeedback">
+      <wsdl:input name="thematicProductStateFeedback" message="tns:thematicProductStateFeedback" />
+      <wsdl:output name="thematicProductStateFeedbackResponse" message="tns:thematicProductStateFeedbackResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPStateFeedbackServiceSoapBinding" type="tns:ITPStateFeedback">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="thematicProductStateFeedback">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="thematicProductStateFeedback">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="thematicProductStateFeedbackResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPStateFeedbackService">
+    <wsdl:port name="TPStateFeedbackPort" binding="tns:TPStateFeedbackServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/TPStateFeedbackService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

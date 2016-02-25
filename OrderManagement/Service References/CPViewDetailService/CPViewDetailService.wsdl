@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPViewDetailService" targetNamespace="http://common.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="commonProductViewDetail" type="tns:commonProductViewDetail" />
+      <xs:element name="commonProductViewDetailResponse" type="tns:commonProductViewDetailResponse" />
+      <xs:complexType name="commonProductViewDetail">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commonProductViewDetailResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="commonProductViewDetailResponse">
+    <wsdl:part name="parameters" element="tns:commonProductViewDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="commonProductViewDetail">
+    <wsdl:part name="parameters" element="tns:commonProductViewDetail" />
+  </wsdl:message>
+  <wsdl:portType name="ICPViewDetail">
+    <wsdl:operation name="commonProductViewDetail">
+      <wsdl:input name="commonProductViewDetail" message="tns:commonProductViewDetail" />
+      <wsdl:output name="commonProductViewDetailResponse" message="tns:commonProductViewDetailResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPViewDetailServiceSoapBinding" type="tns:ICPViewDetail">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="commonProductViewDetail">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="commonProductViewDetail">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="commonProductViewDetailResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPViewDetailService">
+    <wsdl:port name="CPViewDetailPort" binding="tns:CPViewDetailServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPViewDetailService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

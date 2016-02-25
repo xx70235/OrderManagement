@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPHandleOrderService" targetNamespace="http://common.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="handleProductOrder" type="tns:handleProductOrder" />
+      <xs:element name="handleProductOrderResponse" type="tns:handleProductOrderResponse" />
+      <xs:complexType name="handleProductOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="handleProductOrderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="handleProductOrderResponse">
+    <wsdl:part name="parameters" element="tns:handleProductOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="handleProductOrder">
+    <wsdl:part name="parameters" element="tns:handleProductOrder" />
+  </wsdl:message>
+  <wsdl:portType name="ICPHandleOrder">
+    <wsdl:operation name="handleProductOrder">
+      <wsdl:input name="handleProductOrder" message="tns:handleProductOrder" />
+      <wsdl:output name="handleProductOrderResponse" message="tns:handleProductOrderResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPHandleOrderServiceSoapBinding" type="tns:ICPHandleOrder">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="handleProductOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="handleProductOrder">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="handleProductOrderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPHandleOrderService">
+    <wsdl:port name="CPHandleOrderPort" binding="tns:CPHandleOrderServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPHandleOrderService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

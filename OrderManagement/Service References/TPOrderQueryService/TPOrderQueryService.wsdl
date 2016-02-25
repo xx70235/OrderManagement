@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://thematic.order.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="TPOrderQueryService" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://thematic.order.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="thematicProductOrderQuery" type="tns:thematicProductOrderQuery" />
+      <xs:element name="thematicProductOrderQueryResponse" type="tns:thematicProductOrderQueryResponse" />
+      <xs:complexType name="thematicProductOrderQuery">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="thematicProductOrderQueryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="thematicProductOrderQueryResponse">
+    <wsdl:part name="parameters" element="tns:thematicProductOrderQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="thematicProductOrderQuery">
+    <wsdl:part name="parameters" element="tns:thematicProductOrderQuery" />
+  </wsdl:message>
+  <wsdl:portType name="ITPOrderQuery">
+    <wsdl:operation name="thematicProductOrderQuery">
+      <wsdl:input name="thematicProductOrderQuery" message="tns:thematicProductOrderQuery" />
+      <wsdl:output name="thematicProductOrderQueryResponse" message="tns:thematicProductOrderQueryResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPOrderQueryServiceSoapBinding" type="tns:ITPOrderQuery">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="thematicProductOrderQuery">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="thematicProductOrderQuery">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="thematicProductOrderQueryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPOrderQueryService">
+    <wsdl:port name="TPOrderQueryPort" binding="tns:TPOrderQueryServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/TPOrderQueryService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://common.connector.dataservice.gov.org/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" name="CPQueryService" targetNamespace="http://common.connector.dataservice.gov.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://common.connector.dataservice.gov.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="commonProductQuery" type="tns:commonProductQuery" />
+      <xs:element name="commonProductQueryResponse" type="tns:commonProductQueryResponse" />
+      <xs:complexType name="commonProductQuery">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paramXml" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="commonProductQueryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="commonProductQuery">
+    <wsdl:part name="parameters" element="tns:commonProductQuery" />
+  </wsdl:message>
+  <wsdl:message name="commonProductQueryResponse">
+    <wsdl:part name="parameters" element="tns:commonProductQueryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICPQuery">
+    <wsdl:operation name="commonProductQuery">
+      <wsdl:input name="commonProductQuery" message="tns:commonProductQuery" />
+      <wsdl:output name="commonProductQueryResponse" message="tns:commonProductQueryResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CPQueryServiceSoapBinding" type="tns:ICPQuery">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="commonProductQuery">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="commonProductQuery">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="commonProductQueryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CPQueryService">
+    <wsdl:port name="CPQueryPort" binding="tns:CPQueryServiceSoapBinding">
+      <soap:address location="http://219.237.222.107:7080/site/services/CPQueryService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
