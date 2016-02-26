@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementForm));
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -98,8 +98,7 @@
             this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
             this.btViewTaskList = new DevExpress.XtraBars.BarButtonItem();
-            this.btInputConfig = new DevExpress.XtraBars.BarButtonItem();
-            this.btOutputConfig = new DevExpress.XtraBars.BarButtonItem();
+            this.btTaskConfig = new DevExpress.XtraBars.BarButtonItem();
             this.btProduce = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -260,8 +259,7 @@
             this.barButtonItem11,
             this.barButtonItem14,
             this.btViewTaskList,
-            this.btInputConfig,
-            this.btOutputConfig,
+            this.btTaskConfig,
             this.btProduce});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -283,9 +281,9 @@
             this.bt_OrderQuery.Id = 1;
             this.bt_OrderQuery.Name = "bt_OrderQuery";
             this.bt_OrderQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem1.Text = "订单查询";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            this.bt_OrderQuery.SuperTip = superToolTip1;
+            toolTipTitleItem3.Text = "订单查询";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.bt_OrderQuery.SuperTip = superToolTip3;
             this.bt_OrderQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOrderQuery_ItemClick);
             // 
             // bt_TpOrderGet
@@ -712,19 +710,12 @@
             this.btViewTaskList.Name = "btViewTaskList";
             this.btViewTaskList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btViewTaskList_ItemClick);
             // 
-            // btInputConfig
+            // btTaskConfig
             // 
-            this.btInputConfig.Caption = "任务输入配置";
-            this.btInputConfig.Id = 94;
-            this.btInputConfig.Name = "btInputConfig";
-            this.btInputConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btInputConfig_ItemClick);
-            // 
-            // btOutputConfig
-            // 
-            this.btOutputConfig.Caption = "任务输出配置";
-            this.btOutputConfig.Id = 95;
-            this.btOutputConfig.Name = "btOutputConfig";
-            this.btOutputConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOutputConfig_ItemClick);
+            this.btTaskConfig.Caption = "任务参数配置";
+            this.btTaskConfig.Id = 94;
+            this.btTaskConfig.Name = "btTaskConfig";
+            this.btTaskConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btTaskConfig_ItemClick);
             // 
             // btProduce
             // 
@@ -799,8 +790,7 @@
             // ribbonPageGroup8
             // 
             this.ribbonPageGroup8.ItemLinks.Add(this.btViewTaskList);
-            this.ribbonPageGroup8.ItemLinks.Add(this.btInputConfig);
-            this.ribbonPageGroup8.ItemLinks.Add(this.btOutputConfig);
+            this.ribbonPageGroup8.ItemLinks.Add(this.btTaskConfig);
             this.ribbonPageGroup8.ItemLinks.Add(this.btProduce);
             this.ribbonPageGroup8.Name = "ribbonPageGroup8";
             this.ribbonPageGroup8.Text = "生产线管理";
@@ -868,9 +858,9 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem2.Text = "订单查询";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            this.barButtonItem1.SuperTip = superToolTip2;
+            toolTipTitleItem4.Text = "订单查询";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            this.barButtonItem1.SuperTip = superToolTip4;
             // 
             // dockManager
             // 
@@ -1038,8 +1028,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem11;
         private DevExpress.XtraBars.BarButtonItem barButtonItem14;
         private DevExpress.XtraBars.BarButtonItem btViewTaskList;
-        private DevExpress.XtraBars.BarButtonItem btInputConfig;
-        private DevExpress.XtraBars.BarButtonItem btOutputConfig;
+        private DevExpress.XtraBars.BarButtonItem btTaskConfig;
         private DevExpress.XtraBars.BarButtonItem btProduce;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
         //private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;

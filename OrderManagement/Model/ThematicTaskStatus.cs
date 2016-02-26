@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OrderManagement.Model
 {
-    class ThematicTaskStatus
+    public class ThematicTaskStatus
     {
         public string ThematicId { get; set; }
         public OrderStatus TaskStatus { get; set; }

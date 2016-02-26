@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Model_FFGS_WEQ">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="btnInFileTRKSX" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="btnInFileSDZS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="btnInFileFS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="btnInFileCCD" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="btnInFileZBFGD" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="btnOutFile" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Model_FFGS_WEQResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Model_FFGS_WEQResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

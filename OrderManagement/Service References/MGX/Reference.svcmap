@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bfffdba5-b91b-42c7-b686-83f8232c4e02" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://202.205.84.114/MGX.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MGX.disco" MetadataType="Disco" ID="1fe9bdd9-61dc-471c-b732-8f02d75bfbb0" SourceId="1" SourceUrl="http://202.205.84.114/MGX.svc?disco" />
+    <MetadataFile FileName="MGX.wsdl" MetadataType="Wsdl" ID="525a7787-0286-48c5-9bd7-4947dc620eac" SourceId="1" SourceUrl="http://202.205.84.114/MGX.svc?wsdl" />
+    <MetadataFile FileName="MGX.xsd" MetadataType="Schema" ID="b9788ec2-85f3-4129-befc-f348332fd899" SourceId="1" SourceUrl="http://202.205.84.114/MGX.svc?xsd=xsd0" />
+    <MetadataFile FileName="MGX1.xsd" MetadataType="Schema" ID="af42e57a-de24-4f7e-abd8-d8805b4bf3dc" SourceId="1" SourceUrl="http://202.205.84.114/MGX.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

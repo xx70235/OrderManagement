@@ -11,6 +11,7 @@ using DevExpress.XtraBars.Docking;
 using System.Windows.Forms;
 using OrderManagement.Model;
 using GMap.NET.WindowsForms;
+using OrderManagement.MGX;
 
 namespace OrderManagement
 {
@@ -18,7 +19,9 @@ namespace OrderManagement
     {
         
         OrderManagementForm topForm;
-        ThematicTaskStatus currentTask;
+        ThematicTaskStatus currentTaskStatus;
+        public string currentServiceUrl;
+
         public TaskStatusControl()
         {
             InitializeComponent();            
@@ -84,46 +87,48 @@ namespace OrderManagement
                 DataGridViewRow dgvr = dgvTaskStatus.SelectedRows[0];
                 ThematicTaskStatus to = (ThematicTaskStatus)dgvr.DataBoundItem;
                 this.topForm.ShowSelectedOrderInMap(to.ThematicId);
-                              
+                currentTaskStatus = to;
             }
         }
+        
 
-        public void taskOutputConfig()
+        public void taskParameterConfig()
         {
-            throw new NotImplementedException();
-        }
-
-        public void taskInputConfig()
-        {
-            //OrderDetailForm odf = new OrderDetailForm(false);
-            //if (taskStatus == null)
-            //{
-            //    MessageBox.Show("请先获取订单，并选中需解析的订单");
-            //    return;
-            //}
-            //if (dgv_thematicOrder.SelectedRows.Count == 0)
-            //{
-            //    MessageBox.Show("请先选中欲解析的订单");
-            //    return;
-            //}
-            //if (dgv_thematicOrder.SelectedRows.Count == 1)
-            //{
-            //    DataGridViewRow dgvr = dgv_thematicOrder.SelectedRows[0];
-            //    ThematicOrder to = (ThematicOrder)dgvr.DataBoundItem;
-
-            //    odf.RetriveOrder(to);
-            //    this.thematicOrder = new ThematicOrder();
-            //    this.thematicOrder = to;
-
-            //}
-            //odf.Show();
-            //odf.BringToFront();
+            TaskConfigForm tcf = new TaskConfigForm(this);
+            if (dgvTaskStatus == null)
+            {
+                MessageBox.Show("请先获取任务队列，并选中需进行配置的任务");
+                return;
+            }
+            if (dgvTaskStatus.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请先选中需配置的任务");
+                return;
+            }
+            if (dgvTaskStatus.SelectedRows.Count == 1)
+            {
+                DataGridViewRow dgvr = dgvTaskStatus.SelectedRows[0];
+                ThematicTaskStatus to = (ThematicTaskStatus)dgvr.DataBoundItem;
+                MessageBox.Show("当前选择行为:"+to.ThematicId);
+                tcf.RetriveTaskConfigInfo(to);
+            }
+            tcf.Show();
+            tcf.BringToFront();
            
         }
 
         public void invokeServiceToProduce()
         {
-            throw new NotImplementedException();
+            MGXClient client = new MGXClient();
+            MessageBox.Show("已提交任务到服务器，开始生产");
+            int start = System.Environment.TickCount;
+            string mgx1 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\input\BEIJJING_2000M01S01_NPP.TIF";
+            string mgx2 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\output\2000敏感性专题.tif";
+            client.Model_MGX(mgx1,mgx2);
+            int end = System.Environment.TickCount;
+            MessageBox.Show("服务调用成功，耗时：" + (end - start) / 1000 + "s(精确到ms)");           
         }
+        
+
     }
 }

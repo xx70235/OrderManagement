@@ -46,6 +46,7 @@ namespace OrderManagement
         List<ThematicOrder> currentThematicOrderList = new List<ThematicOrder>();
         Boolean isTaskSelected=false;
         
+
         #region GMapMarker
         internal readonly GMapOverlay objects = new GMapOverlay("objects");
         internal readonly GMapOverlay polygons = new GMapOverlay("polygons");
@@ -923,12 +924,13 @@ namespace OrderManagement
 
             return thematicOrderList;
         }
+       
 
-        private void btInputConfig_ItemClick(object sender, ItemClickEventArgs e)
+        private void btProduce_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (this.tsc != null)
             {
-                this.tsc.taskInputConfig();
+                this.tsc.invokeServiceToProduce(); ;
             }
             else
             {
@@ -937,21 +939,16 @@ namespace OrderManagement
             
         }
 
-        private void btOutputConfig_ItemClick(object sender, ItemClickEventArgs e)
+        private void btTaskConfig_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (this.tsc != null)
             {
-                this.tsc.taskOutputConfig();
+                this.tsc.taskParameterConfig();
             }
             else
             {
                 MessageBox.Show("请先获取生产队列，并选中需进行配置的生产任务");
             }
-        }
-
-        private void btProduce_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            this.tsc.invokeServiceToProduce();
         }
 
       
