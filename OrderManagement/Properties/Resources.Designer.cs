@@ -73,9 +73,29 @@ namespace OrderManagement.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Gnome_Media_Playback_Start_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Media-Playback-Start-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Gnome_Network_Idle_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Network-Idle-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Gnome_System_Run_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-System-Run-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +116,16 @@ namespace OrderManagement.Properties {
         internal static System.Drawing.Bitmap Gnome_View_Sort_Ascending_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-View-Sort-Ascending-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Gnome_View_Sort_Descending_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-View-Sort-Descending-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

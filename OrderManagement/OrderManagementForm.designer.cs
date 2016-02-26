@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementForm));
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -281,9 +281,9 @@
             this.bt_OrderQuery.Id = 1;
             this.bt_OrderQuery.Name = "bt_OrderQuery";
             this.bt_OrderQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem3.Text = "订单查询";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            this.bt_OrderQuery.SuperTip = superToolTip3;
+            toolTipTitleItem1.Text = "订单查询";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.bt_OrderQuery.SuperTip = superToolTip1;
             this.bt_OrderQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOrderQuery_ItemClick);
             // 
             // bt_TpOrderGet
@@ -706,22 +706,28 @@
             // btViewTaskList
             // 
             this.btViewTaskList.Caption = "查看生产队列";
+            this.btViewTaskList.Glyph = global::OrderManagement.Properties.Resources.Gnome_View_Sort_Descending_32;
             this.btViewTaskList.Id = 93;
             this.btViewTaskList.Name = "btViewTaskList";
+            this.btViewTaskList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btViewTaskList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btViewTaskList_ItemClick);
             // 
             // btTaskConfig
             // 
             this.btTaskConfig.Caption = "任务参数配置";
+            this.btTaskConfig.Glyph = global::OrderManagement.Properties.Resources.Gnome_System_Run_32;
             this.btTaskConfig.Id = 94;
             this.btTaskConfig.Name = "btTaskConfig";
+            this.btTaskConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btTaskConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btTaskConfig_ItemClick);
             // 
             // btProduce
             // 
             this.btProduce.Caption = "执行生产";
+            this.btProduce.Glyph = global::OrderManagement.Properties.Resources.Gnome_Media_Playback_Start_32;
             this.btProduce.Id = 96;
             this.btProduce.Name = "btProduce";
+            this.btProduce.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btProduce.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btProduce_ItemClick);
             // 
             // ribbonPage1
@@ -858,9 +864,9 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem4.Text = "订单查询";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.barButtonItem1.SuperTip = superToolTip4;
+            toolTipTitleItem2.Text = "订单查询";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.barButtonItem1.SuperTip = superToolTip2;
             // 
             // dockManager
             // 
