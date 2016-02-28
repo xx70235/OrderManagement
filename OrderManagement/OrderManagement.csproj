@@ -120,12 +120,7 @@
     <Compile Include="Model\Sensors.cs" />
     <Compile Include="Model\ServerNode.cs" />
     <Compile Include="Model\ThematicTaskStatus.cs" />
-    <Compile Include="Service References\FFGS_WEQ_Service\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MGX\Reference.cs">
+    <Compile Include="Service References\EcoSystemServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -294,7 +289,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\OrderManagement.Model.AssistData.datasource" />
     <None Include="Properties\DataSources\OrderManagement.Model.CommonOrder.datasource" />
     <None Include="Properties\DataSources\OrderManagement.Model.InputParameter.datasource" />
@@ -321,21 +318,14 @@
     <None Include="Service References\CPRequireSubmitService\CPRequireSubmitService.wsdl" />
     <None Include="Service References\CPStateFeedbackService\CPStateFeedbackService.wsdl" />
     <None Include="Service References\CPViewDetailService\CPViewDetailService.wsdl" />
-    <None Include="Service References\FFGS_WEQ_Service\FFGS_WEQ_Service.wsdl" />
-    <None Include="Service References\FFGS_WEQ_Service\FFGS_WEQ_Service.xsd">
+    <None Include="Service References\EcoSystemServices\EcoSystemServices.wsdl" />
+    <None Include="Service References\EcoSystemServices\EcoSystemServices.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\FFGS_WEQ_Service\FFGS_WEQ_Service1.xsd">
+    <None Include="Service References\EcoSystemServices\EcoSystemServices1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ICPFTPsubmit\CPFTPSubmitService.wsdl" />
-    <None Include="Service References\MGX\MGX.wsdl" />
-    <None Include="Service References\MGX\MGX.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MGX\MGX1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\TPOrderFeedbackService\TPOrderFeedbackService.wsdl" />
     <None Include="Service References\TPOrderQueryService\TPOrderQueryService.wsdl" />
     <None Include="Service References\TPOrderRegisterService\TPOrderRegisterService.wsdl" />
@@ -356,9 +346,8 @@
     <WCFMetadataStorage Include="Service References\CPRequireSubmitService\" />
     <WCFMetadataStorage Include="Service References\CPStateFeedbackService\" />
     <WCFMetadataStorage Include="Service References\CPViewDetailService\" />
-    <WCFMetadataStorage Include="Service References\FFGS_WEQ_Service\" />
+    <WCFMetadataStorage Include="Service References\EcoSystemServices\" />
     <WCFMetadataStorage Include="Service References\ICPFTPsubmit\" />
-    <WCFMetadataStorage Include="Service References\MGX\" />
     <WCFMetadataStorage Include="Service References\TPOrderFeedbackService\" />
     <WCFMetadataStorage Include="Service References\TPOrderQueryService\" />
     <WCFMetadataStorage Include="Service References\TPOrderRegisterService\" />
@@ -571,36 +560,6 @@
     <None Include="Resources\Gnome-View-Sort-Ascending-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\FFGS_WEQ_Service\FFGS_WEQ_Service.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FFGS_WEQ_Service\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FFGS_WEQ_Service\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FFGS_WEQ_Service\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MGX\MGX.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MGX\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MGX\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MGX\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Gnome-System-Run-32.png" />
   </ItemGroup>
   <ItemGroup>
@@ -608,6 +567,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Gnome-View-Sort-Descending-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSystemServices\EcoSystemServices.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSystemServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSystemServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSystemServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

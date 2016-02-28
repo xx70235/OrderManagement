@@ -11,7 +11,6 @@ using DevExpress.XtraBars.Docking;
 using System.Windows.Forms;
 using OrderManagement.Model;
 using GMap.NET.WindowsForms;
-using OrderManagement.MGX;
 
 namespace OrderManagement
 {
@@ -119,14 +118,38 @@ namespace OrderManagement
 
         public void invokeServiceToProduce()
         {
-            MGXClient client = new MGXClient();
-            MessageBox.Show("已提交任务到服务器，开始生产");
+
+
+            EcoSystemServices.EcoSystemServicesClient client = new EcoSystemServices.EcoSystemServicesClient();
             int start = System.Environment.TickCount;
-            string mgx1 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\input\BEIJJING_2000M01S01_NPP.TIF";
-            string mgx2 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\output\2000敏感性专题.tif";
-            client.Model_MGX(mgx1,mgx2);
-            int end = System.Environment.TickCount;
-            MessageBox.Show("服务调用成功，耗时：" + (end - start) / 1000 + "s(精确到ms)");           
+
+
+
+            //string mgx1 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\input\BEIJJING_2000M01S01_NPP.TIF";
+            //string mgx2 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\output\2000敏感性专题.tif";
+            int end = 0;
+            string info = null;
+            IAsyncResult ar = null;
+            string xmlContent = null;
+            xmlContent = System.IO.File.ReadAllText(@"C:\\荒漠化指数.xml");
+            //MessageBox.Show("XML内容：" + xmlContent);
+            MessageBox.Show("已提交任务到服务器，开始生产");
+            ar = client.BeginModel_Invoke(xmlContent, delegate
+            {
+                //回调方法体
+                end = System.Environment.TickCount;
+                info = client.EndModel_Invoke(ar);
+                //string currentResult = "生态系统敏感性指数服务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s(精确到ms)";                
+                MessageBox.Show("当前任务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s(精确到ms)");
+                
+            }, new object());
+            Console.ReadLine();
+            
+        }
+       
+        private void changeStatusControlAndMap()
+        {
+            //throw new NotImplementedException();
         }
         
 
