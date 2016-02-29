@@ -120,11 +120,6 @@
     <Compile Include="Model\Sensors.cs" />
     <Compile Include="Model\ServerNode.cs" />
     <Compile Include="Model\ThematicTaskStatus.cs" />
-    <Compile Include="Service References\EcoSystemServices\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="TaskConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +251,7 @@
     <Compile Include="Utilities\HardwareMonitor.cs" />
     <Compile Include="Utilities\HttpHelper.cs" />
     <Compile Include="Utilities\JsonUtility.cs" />
+    <Compile Include="Utilities\ServiceManager.cs" />
     <Compile Include="Utilities\XmlUtility.cs" />
     <EmbeddedResource Include="CommonOrderControl.resx">
       <DependentUpon>CommonOrderControl.cs</DependentUpon>
@@ -318,13 +314,6 @@
     <None Include="Service References\CPRequireSubmitService\CPRequireSubmitService.wsdl" />
     <None Include="Service References\CPStateFeedbackService\CPStateFeedbackService.wsdl" />
     <None Include="Service References\CPViewDetailService\CPViewDetailService.wsdl" />
-    <None Include="Service References\EcoSystemServices\EcoSystemServices.wsdl" />
-    <None Include="Service References\EcoSystemServices\EcoSystemServices.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EcoSystemServices\EcoSystemServices1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ICPFTPsubmit\CPFTPSubmitService.wsdl" />
     <None Include="Service References\TPOrderFeedbackService\TPOrderFeedbackService.wsdl" />
     <None Include="Service References\TPOrderQueryService\TPOrderQueryService.wsdl" />
@@ -346,7 +335,6 @@
     <WCFMetadataStorage Include="Service References\CPRequireSubmitService\" />
     <WCFMetadataStorage Include="Service References\CPStateFeedbackService\" />
     <WCFMetadataStorage Include="Service References\CPViewDetailService\" />
-    <WCFMetadataStorage Include="Service References\EcoSystemServices\" />
     <WCFMetadataStorage Include="Service References\ICPFTPsubmit\" />
     <WCFMetadataStorage Include="Service References\TPOrderFeedbackService\" />
     <WCFMetadataStorage Include="Service References\TPOrderQueryService\" />
@@ -569,19 +557,13 @@
     <None Include="Resources\Gnome-View-Sort-Descending-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\EcoSystemServices\EcoSystemServices.disco" />
+    <ProjectReference Include="..\EnvironmentServices_New\EnvironmentServices_New.csproj">
+      <Project>{9be9e8d4-e3ac-4e9b-b19b-944d5561c071}</Project>
+      <Name>EnvironmentServices_New</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\EcoSystemServices\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EcoSystemServices\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EcoSystemServices\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <None Include="Resources\Gnome-Go-Down-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

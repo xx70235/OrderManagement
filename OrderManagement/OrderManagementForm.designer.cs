@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementForm));
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -100,6 +100,7 @@
             this.btViewTaskList = new DevExpress.XtraBars.BarButtonItem();
             this.btTaskConfig = new DevExpress.XtraBars.BarButtonItem();
             this.btProduce = new DevExpress.XtraBars.BarButtonItem();
+            this.bt_downloadResultImg = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -260,10 +261,11 @@
             this.barButtonItem14,
             this.btViewTaskList,
             this.btTaskConfig,
-            this.btProduce});
+            this.btProduce,
+            this.bt_downloadResultImg});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 97;
+            this.ribbonControl1.MaxItemId = 98;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -281,9 +283,9 @@
             this.bt_OrderQuery.Id = 1;
             this.bt_OrderQuery.Name = "bt_OrderQuery";
             this.bt_OrderQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem1.Text = "订单查询";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            this.bt_OrderQuery.SuperTip = superToolTip1;
+            toolTipTitleItem3.Text = "订单查询";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.bt_OrderQuery.SuperTip = superToolTip3;
             this.bt_OrderQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOrderQuery_ItemClick);
             // 
             // bt_TpOrderGet
@@ -730,6 +732,15 @@
             this.btProduce.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btProduce.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btProduce_ItemClick);
             // 
+            // bt_downloadResultImg
+            // 
+            this.bt_downloadResultImg.Caption = "下载结果数据";
+            this.bt_downloadResultImg.Glyph = global::OrderManagement.Properties.Resources.Gnome_Go_Down_32;
+            this.bt_downloadResultImg.Id = 97;
+            this.bt_downloadResultImg.Name = "bt_downloadResultImg";
+            this.bt_downloadResultImg.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.bt_downloadResultImg.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bt_downloadResultImg_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -798,6 +809,7 @@
             this.ribbonPageGroup8.ItemLinks.Add(this.btViewTaskList);
             this.ribbonPageGroup8.ItemLinks.Add(this.btTaskConfig);
             this.ribbonPageGroup8.ItemLinks.Add(this.btProduce);
+            this.ribbonPageGroup8.ItemLinks.Add(this.bt_downloadResultImg);
             this.ribbonPageGroup8.Name = "ribbonPageGroup8";
             this.ribbonPageGroup8.Text = "生产线管理";
             // 
@@ -864,9 +876,9 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem2.Text = "订单查询";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            this.barButtonItem1.SuperTip = superToolTip2;
+            toolTipTitleItem4.Text = "订单查询";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            this.barButtonItem1.SuperTip = superToolTip4;
             // 
             // dockManager
             // 
@@ -1037,6 +1049,7 @@
         private DevExpress.XtraBars.BarButtonItem btTaskConfig;
         private DevExpress.XtraBars.BarButtonItem btProduce;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
+        private DevExpress.XtraBars.BarButtonItem bt_downloadResultImg;
         //private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         //private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
        

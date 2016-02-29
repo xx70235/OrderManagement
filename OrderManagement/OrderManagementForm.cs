@@ -951,6 +951,11 @@ namespace OrderManagement
             }
         }
 
+        private void bt_downloadResultImg_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
       
     }
 
