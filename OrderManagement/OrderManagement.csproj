@@ -248,6 +248,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DataBaseUtility.cs" />
+    <Compile Include="Utilities\FtpHelper.cs" />
     <Compile Include="Utilities\HardwareMonitor.cs" />
     <Compile Include="Utilities\HttpHelper.cs" />
     <Compile Include="Utilities\JsonUtility.cs" />

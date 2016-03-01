@@ -225,7 +225,7 @@ namespace OrderManagement
             polygons.Polygons.Add(polygon);
         }
 
-        public void ShowSelectedOrderInMap(string orderId)
+        public void ShowSelectedOrderInMap(string orderId,ThematicTaskStatus taskStatus)
         {
 
             foreach (GMapPolygon r in polygons.Polygons)
@@ -235,7 +235,7 @@ namespace OrderManagement
                     GMapPolygonEx rEx = (GMapPolygonEx)r;
                     if (rEx.orderId.Equals(orderId))
                     {
-                        rEx.IsSelected();
+                        rEx.IsSelected(taskStatus);
                         this.gMap.Position = new PointLatLng(rEx.Points[0].Lat, rEx.Points[0].Lng);
                         
                     }
@@ -952,8 +952,15 @@ namespace OrderManagement
         }
 
         private void bt_downloadResultImg_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
+        {            
+            if (this.tsc != null)
+            {
+                this.tsc.downloadDataToLocal(); ;
+            }
+            else
+            {
+                MessageBox.Show("请先获取生产队列，再选择已生产完成的订单");
+            }
         }
 
       

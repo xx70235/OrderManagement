@@ -13,6 +13,7 @@ namespace OrderManagement.Model
         等待生产队列,
         生产中,
         生产完成,
+        生产失败,
         未处理
     }
 }

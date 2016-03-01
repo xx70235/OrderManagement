@@ -70,7 +70,7 @@ namespace OrderManagement
                         //cms_rightButton.Show(MousePosition.X, MousePosition.Y);
                         DataGridViewRow dgvr = dgv_thematicOrder.SelectedRows[0];
                         ThematicOrder to = (ThematicOrder)dgvr.DataBoundItem;
-                        this.topForm.ShowSelectedOrderInMap(to.Orderid);
+                        this.topForm.ShowSelectedOrderInMap(to.Orderid,null);
                     }
                 }
             }
@@ -171,7 +171,7 @@ namespace OrderManagement
             {
                 DataGridViewRow dgvr = dgv_thematicOrder.SelectedRows[0];
                 ThematicOrder to = (ThematicOrder)dgvr.DataBoundItem;
-                this.topForm.ShowSelectedOrderInMap(to.Orderid);
+                this.topForm.ShowSelectedOrderInMap(to.Orderid,null);
             }
         }
     }

@@ -11,7 +11,7 @@ using DevExpress.XtraBars.Docking;
 using System.Windows.Forms;
 using OrderManagement.Model;
 using GMap.NET.WindowsForms;
-
+using System.IO;
 
 using OrderManagement.Utilities;
 using System.ServiceModel;
@@ -96,7 +96,7 @@ namespace OrderManagement
             {
                 DataGridViewRow dgvr = dgvTaskStatus.SelectedRows[0];
                 ThematicTaskStatus to = (ThematicTaskStatus)dgvr.DataBoundItem;
-                this.topForm.ShowSelectedOrderInMap(to.ThematicId);
+                this.topForm.ShowSelectedOrderInMap(to.ThematicId,to);
                 currentTaskStatus = to;
             }
         }
@@ -146,14 +146,14 @@ namespace OrderManagement
                 to = (ThematicTaskStatus)dgvr.DataBoundItem;
                 if (to!=null)
                 {
-                  string xml= constructAllTaskConfig(to);
-                  //string xmlContent = System.IO.File.ReadAllText(@"C:\\荒漠化指数.xml");
-                  serverNodeIp= to.NodeIp;
-                  currentServiceUrl = currentServiceUrl.Replace("202.205.84.114",serverNodeIp);
-                  changeStatusControlAndMap(to,"生产中","");
-                  dynamicCall(to,currentServiceUrl, xml);
-                  
-                  //MessageBox.Show("当前调用XML信息为："+xml);
+                    string xml = constructAllTaskConfig(to);
+                    //string xmlContent = System.IO.File.ReadAllText(@"C:\\荒漠化指数.xml");
+                    serverNodeIp = to.NodeIp;
+                    currentServiceUrl = currentServiceUrl.Replace("202.205.84.114", serverNodeIp);
+                    changeStatusControlAndMap(to, "生产中", "");
+                    dynamicCall(to, currentServiceUrl, xml);
+
+                    //MessageBox.Show("当前调用XML信息为：" + xml);                
                 }
             }
 
@@ -190,15 +190,30 @@ namespace OrderManagement
             int end;
             IAsyncResult ar = null;
             string info = null;
-            IEcoSystemServices client = ServiceManager.CreateWCFServiceByURL<IEcoSystemServices>(url);
-            ar = client.BeginModel_Invoke(xmlContent, delegate
+            try
             {
-                end = System.Environment.TickCount;
-                info = client.EndModel_Invoke(ar);
-                string currentResult = "服务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s)";
-                changeStatusControlAndMap(to,"生产完成",currentResult);
-                System.Windows.Forms.MessageBox.Show(currentResult);
-            }, new object());
+                IEcoSystemServices client = ServiceManager.CreateWCFServiceByURL<IEcoSystemServices>(url);
+                ar = client.BeginModel_Invoke(xmlContent, delegate
+                {
+                    end = System.Environment.TickCount;
+                    info = client.EndModel_Invoke(ar);
+                    string currentResult = "服务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s)";
+                    changeStatusControlAndMap(to, "生产完成", currentResult);
+                    //System.Windows.Forms.MessageBox.Show(currentResult);
+                }, new object());
+            }
+            catch (Exception ef)
+            {
+                MessageBox.Show("服务调用失败，请检查数据：" + ef);
+
+            }
+            finally {
+                if (info==null)
+                {
+                    info = "Failed";
+                }
+           
+            }
             return info;
         }
 
@@ -231,6 +246,32 @@ namespace OrderManagement
             string xmlContent = constructInvokeXml(taskInputInNeed, taskOutputInNeed,currentProductName); 
             return xmlContent;
         
+        }
+        private string updateCurrentModelName(ThematicTaskStatus to) 
+        {
+            ThematicOrder order = null;
+            DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER where TASK_ORDER_ID='" + to.ThematicId + "'");
+            
+            if (dt == null)
+            {
+                MessageBox.Show("不存在当前任务配置信息,请检查数据库!");
+                return null;
+            }
+            foreach (DataRow row in dt.Rows)
+            {
+                order = new ThematicOrder();
+                order.Orderid = row["TASK_ORDER_ID"].ToString();
+                order.ProductName = row["PRODUCT_NAME"].ToString();
+
+                order.EnglishName = row["ENGLISH_NAME"].ToString();
+                order.OrderDate = row["CREATE_DATE"].ToString();
+                order.ProductType = row["PRODUCT_TYPE"].ToString();
+                order.StartDate = row["START_DATE"].ToString();
+                order.EndDate = row["END_DATE"].ToString();
+                order.CoverScope = row["LEFT_TOP_LON"].ToString() + "," + row["LEFT_TOP_LAT"].ToString() + "," + row["RIGHT_BOTTOM_LON"].ToString() + "," + row["RIGHT_BOTTOM_LAT"].ToString();
+            }
+            currentProductName = order.ProductName;
+            return currentProductName;
         }
 
         private string constructInvokeXml(List<InputParameter> taskInputInNeed, List<OutputParameter> taskOutputInNeed, string productName)
@@ -309,7 +350,7 @@ namespace OrderManagement
             if ("生产中".Equals(status))
             {
                 to.TaskStatus = OrderStatus.生产中;
-                to.StatusDes = "该订单已进入生产队列，正在生产中";
+                to.StatusDes = "已进入生产队列，正在生产中" + extraInfo;
                 
                 DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where TASK_ORDER_ID='" + to.ThematicId + "'");               
                 if (dt == null)
@@ -324,14 +365,14 @@ namespace OrderManagement
                 }
                 DataBaseUtility.DataUpdate("TASK_ORDER_STATUS",dt);
                 //修改前端地图控件颜色
-
                 this.Refresh();
+                this.topForm.ShowSelectedOrderInMap(to.ThematicId,to);
+                
             }
             if ("生产完成".Equals(status))
             {
                 to.TaskStatus = OrderStatus.生产完成;
-                to.StatusDes = "该订单已生产完成，可下载相应数据到本地";
-                
+                to.StatusDes = "已生产完成，可下载结果数据到本地" + extraInfo;                
                 DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where TASK_ORDER_ID='" + to.ThematicId + "'");
                 if (dt == null)
                 {
@@ -344,9 +385,8 @@ namespace OrderManagement
                     row["STATUS_DESC"] = to.StatusDes + ";" + extraInfo;
                 }
                 DataBaseUtility.DataUpdate("TASK_ORDER_STATUS", dt);
-                //修改前端地图控件颜色
-
-                //this.Refresh();
+                //修改前端地图控件颜色                
+                
             }
             //throw new NotImplementedException();
         }
@@ -421,6 +461,93 @@ namespace OrderManagement
             }
             return outputList;
         }
-       
+
+
+        public  void downloadDataToLocal()
+        {
+            ThematicTaskStatus to = null;            
+            string locaPath=null;
+            string remoteFile;
+            if (dgvTaskStatus == null)
+            {
+                MessageBox.Show("请先获取任务队列，并选中完成生产的任务");
+                return;
+            }
+            if (dgvTaskStatus.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请先选中完成生产的任务");
+                return;
+            }
+            if (dgvTaskStatus.SelectedRows.Count == 1)
+            {
+                DataGridViewRow dgvr = dgvTaskStatus.SelectedRows[0];
+                to = (ThematicTaskStatus)dgvr.DataBoundItem;
+                updateCurrentModelName(to);
+               List<OutputParameter> outList=QueryOutputParameterInNeed(currentProductName);
+                if (to != null)
+                {
+                    if (to.TaskStatus == OrderStatus.生产完成)
+                    {
+                        System.Windows.Forms.FolderBrowserDialog folderSave = new System.Windows.Forms.FolderBrowserDialog();                        
+                        if(folderSave.ShowDialog()==DialogResult.OK)
+                         {
+                             locaPath = folderSave.SelectedPath;
+                             string btnOutFile = outList[0].OutputPara_currentValue;
+                             remoteFile = FtpHelper.ftpPath + btnOutFile.Substring(btnOutFile.LastIndexOf("\\") + 1);
+                             string ftpPath = remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1);
+                             string fileName = remoteFile.Substring(remoteFile.LastIndexOf("/") + 1);
+                             FtpHelper.Instance.DownloadMultiple(FtpHelper.userId, FtpHelper.pwd, remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1), locaPath, remoteFile.Substring(remoteFile.LastIndexOf("/") + 1));
+                             MessageBox.Show("下载成功");
+                          }                                                                                                                            
+                    }
+                    else
+                    {
+                        MessageBox.Show("专题产品生产尚未完成，请稍后尝试下载");
+                    }
+                    
+                }
+            }
+            
+            
+        }
+
+        private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Refresh();
+            if (currentTaskStatus!=null)
+            {
+                this.topForm.ShowSelectedOrderInMap(currentTaskStatus.ThematicId,currentTaskStatus);
+            }            
+        }
+
+        private void dgvTaskStatus_CellMouseDown(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    if (e.RowIndex >= 0)
+                    {
+                        //若行已是选中状态就不再进行设置
+                        if (dgvTaskStatus.Rows[e.RowIndex].Selected == false)
+                        {
+                            dgvTaskStatus.ClearSelection();
+                            dgvTaskStatus.Rows[e.RowIndex].Selected = true;
+                        }
+                        this.topForm.ShowSelectedOrderInMap(currentTaskStatus.ThematicId, currentTaskStatus);
+                        
+                        //弹出操作菜单
+                        bt_refresh.Show(MousePosition.X, MousePosition.Y);
+                    }
+                }
+                
+           
+            }
+            catch (System.ArgumentOutOfRangeException e1)
+            {
+                //e1.ToString();
+            }
+
+        }
     }
 }

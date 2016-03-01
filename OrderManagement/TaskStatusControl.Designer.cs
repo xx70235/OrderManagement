@@ -38,8 +38,11 @@
             this.nodeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nodeIpDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.thematicTaskStatusBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bt_refresh = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.刷新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaskStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thematicTaskStatusBindingSource)).BeginInit();
+            this.bt_refresh.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvTaskStatus
@@ -61,6 +64,7 @@
             this.dgvTaskStatus.RowTemplate.Height = 23;
             this.dgvTaskStatus.Size = new System.Drawing.Size(969, 164);
             this.dgvTaskStatus.TabIndex = 0;
+            this.dgvTaskStatus.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTaskStatus_CellMouseDown);
             this.dgvTaskStatus.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvTaskStatus_CellPainting);
             this.dgvTaskStatus.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTaskStatus_RowHeaderMouseClick);
             // 
@@ -116,6 +120,20 @@
             // 
             this.thematicTaskStatusBindingSource.DataSource = typeof(OrderManagement.Model.ThematicTaskStatus);
             // 
+            // bt_refresh
+            // 
+            this.bt_refresh.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.刷新ToolStripMenuItem});
+            this.bt_refresh.Name = "bt_refresh";
+            this.bt_refresh.Size = new System.Drawing.Size(99, 26);
+            // 
+            // 刷新ToolStripMenuItem
+            // 
+            this.刷新ToolStripMenuItem.Name = "刷新ToolStripMenuItem";
+            this.刷新ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.刷新ToolStripMenuItem.Text = "刷新";
+            this.刷新ToolStripMenuItem.Click += new System.EventHandler(this.刷新ToolStripMenuItem_Click);
+            // 
             // TaskStatusControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -125,6 +143,7 @@
             this.Size = new System.Drawing.Size(969, 164);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaskStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thematicTaskStatusBindingSource)).EndInit();
+            this.bt_refresh.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,5 +159,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdateTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeIpDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ContextMenuStrip bt_refresh;
+        private System.Windows.Forms.ToolStripMenuItem 刷新ToolStripMenuItem;
     }
 }

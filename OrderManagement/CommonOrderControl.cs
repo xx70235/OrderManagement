@@ -71,7 +71,7 @@ namespace OrderManagement
                         //cms_rightButton.Show(MousePosition.X, MousePosition.Y);
                         DataGridViewRow dgvr = dgv_CommonOrder.SelectedRows[0];
                         CommonOrder co = (CommonOrder)dgvr.DataBoundItem;
-                        this.topForm.ShowSelectedOrderInMap(co.Orderid);
+                        this.topForm.ShowSelectedOrderInMap(co.Orderid,null);
                     }
                 }
             }
@@ -176,7 +176,7 @@ namespace OrderManagement
             {
                 DataGridViewRow dgvr = dgv_CommonOrder.SelectedRows[0];
                 CommonOrder co = (CommonOrder)dgvr.DataBoundItem;
-                this.topForm.ShowSelectedOrderInMap(co.Orderid);
+                this.topForm.ShowSelectedOrderInMap(co.Orderid,null);
             }
         }
     }

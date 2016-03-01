@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="AsyncResult.cs" />
     <Compile Include="EcoSystemServices.cs" />
+    <Compile Include="ServerFtpHelper.cs" />
     <Compile Include="ProductNameConfig.cs" />
     <Compile Include="IEcoSystemServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

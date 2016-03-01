@@ -22,8 +22,7 @@ namespace EnvironmentServices_New
         public IAsyncResult BeginModel_Invoke(string inputXml, AsyncCallback callback, object state)
         {
             Console.WriteLine("Asynchronous call:BeginModel_CDTH on ThreadID {0}", Thread.CurrentThread.ManagedThreadId);
-            return new Model_Invoke_Result(new Invoke_Produce(inputXml), callback, state);
-            
+            return new Model_Invoke_Result(new Invoke_Produce(inputXml), callback, state);            
         }
 
         public string EndModel_Invoke(IAsyncResult ar)
@@ -45,6 +44,7 @@ namespace EnvironmentServices_New
         //List<string> stateList;
 
         private string functionName;
+
         public Model_Invoke_Result(Invoke_Produce produce, AsyncCallback callback, object state)
             : base(callback, state)
         {
@@ -98,6 +98,8 @@ namespace EnvironmentServices_New
 
          private string functionName;
          private string category;
+         private string resultDir;
+         private string btnOutFile;
          public Invoke_Produce(string xml)
          {
              guid = System.Guid.NewGuid().ToString();
@@ -105,11 +107,11 @@ namespace EnvironmentServices_New
 
              executeDir += "服务执行目录" + guid;
 
-             //if (!File.Exists(executeDir))
-             //{
-             //    Directory.CreateDirectory(executeDir);
-             //    executeDir += "/";
-             //}
+             if (!File.Exists(executeDir))
+             {
+                 Directory.CreateDirectory(executeDir);
+                 executeDir += "/";
+             }
              //if (btnInFilePD.ToLower().StartsWith("ftp"))
              //{
              //    FtpHelper.Instance.DownloadMultiple(FtpHelper.userId, FtpHelper.pwd, btnInFilePD.Substring(0, btnInFilePD.LastIndexOf("/") + 1), executeDir, btnInFilePD.Substring(btnInFilePD.LastIndexOf("/") + 1));
@@ -186,27 +188,40 @@ namespace EnvironmentServices_New
              }
              else
              {
-                 //if (File.Exists(btnOutFile))
-                 //{
-                 //    if (remoteFile != null)
-                 //    {
-                 //        FtpHelper.Instance.Upload(FtpHelper.userId, FtpHelper.pwd, this.btnOutFile, remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1));
-                 //    }
-                 //    result = true;
-                 //}
-                 //else
-                 //{
-
-                 //    result = false;
-                 //}
-                 result = true;
+                 if (btnOutFile!=null&&!"".Equals(btnOutFile))
+                 {
+                     if (File.Exists(btnOutFile))
+                     {
+                         
+                             //C:\测试数据\03-生态环境问题\06-植被水分利用效率\output\test.tif
+                             //ftp://202.205.84.114/结果数据/06-植被水分利用效率\output\test.tif
+                              remoteFile = ServerFtpHelper.ftpPath+btnOutFile.Substring(btnOutFile.LastIndexOf("/") + 1);                             
+                                 //this.btnOutFile = executeDir + btnOutFile.Substring(btnOutFile.LastIndexOf("/") + 1);                                                            
+                         if (remoteFile != null)
+                         {
+                             ServerFtpHelper.Instance.UploadMultiple(ServerFtpHelper.userId, ServerFtpHelper.pwd,btnOutFile,remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1));
+                         }
+                         result = true;
+                     }
+                     else
+                     {
+                         result = false;
+                     }
+                 }
+                 else
+                 {
+                     result = false;
+                 }
+                 
+                 
              }
              finish = true;
 
          }
 
          void bg_DoWork(object sender, DoWorkEventArgs e)
-         {
+         {                       
+
              //0、解析XML，获取产品名称-服务路径
              XmlDocument xmlDocument = new XmlDocument();
              xmlDocument.LoadXml(xmlContent);
@@ -217,7 +232,25 @@ namespace EnvironmentServices_New
                  //category = XmlManager.GetAttributeValue(lastChild, "Category");
                                  
              }
-             //1、根据输入数据构建指定的防风固沙风蚀流失量xml  
+             XmlNode xmlNode = xmlDocument.LastChild.SelectSingleNode("fileArg");
+             if (xmlNode != null)
+             {
+                 foreach (XmlNode node in xmlNode.ChildNodes)
+                 {
+                     string text;
+                     string value;
+                     string value2;
+                     GetKeyValueDesc(node, out text, out value, out value2);
+                     if (!string.IsNullOrEmpty(text))
+                     {
+                         if ("btnOutFile".Equals(text))
+                         {
+                             btnOutFile = value;
+                         }                       
+                     }
+                 }
+             }
+             //1、根据输入数据构建指定的调用xml  
                       
              WriteXml(xmlContent,functionName);
              //2、根据xml,调用指定的exe文件，执行服务
@@ -251,6 +284,21 @@ namespace EnvironmentServices_New
 
              }
          }
+         private static void GetKeyValueDesc(XmlNode node, out string key, out string value, out string desc)
+         {
+             key = "";
+             value = "";
+             desc = "";
+             try
+             {
+                 key = ((node.Attributes["Name"] == null) ? "" : node.Attributes["Name"].Value);
+                 value = node.InnerText;
+                 desc = ((node.Attributes["Desc"] == null) ? "" : node.Attributes["Desc"].Value);
+             }
+             catch
+             {
+             }
+         }
          private string GetAttributeValue(XmlNode nodeRoot, string attrName)
          {
              string result;
@@ -265,6 +313,7 @@ namespace EnvironmentServices_New
              }
              return result;
          }
+        
          private void WriteXml(string xmlContent,string xmlFileName)
          {
              try
