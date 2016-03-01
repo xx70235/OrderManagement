@@ -963,6 +963,20 @@ namespace OrderManagement
             }
         }
 
+        private void btDeleteNode_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            try
+            {
+                //this.smc = new ServerMonitorControl();
+                this.smc.DeleteSeverNode();
+            }
+            catch (NullReferenceException e1)
+            {
+                //MessageBox.Show("请将节点信息填写完整");
+            }
+        }
+
       
     }
 
