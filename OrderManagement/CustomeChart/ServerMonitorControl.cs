@@ -24,7 +24,7 @@ namespace OrderManagement.CustomeChart
             this.webBrowser1.Navigate("http://10.0.0.25:8085/");
         }
 
-        public void AddServerNode(string name, string ip, int port)
+        public bool AddServerNode(string name, string ip, int port)
         {
             ServerNode sn = new ServerNode();
             sn.NodeIp = ip;
@@ -38,6 +38,15 @@ namespace OrderManagement.CustomeChart
             else
                 sn.Status = "在线";
             DataTable dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
+            foreach(DataRow row in dt.Rows)
+            {
+                if (row["NODE_IP"].ToString().Equals(ip) || row["NODE_NAME"].ToString().Equals(name))
+                { 
+                    MessageBox.Show("该主机已列入监控，请勿重复添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+            }
             DataRow newRow = dt.NewRow();
             newRow["NODE_NAME"] = sn.NodeName;
             newRow["NODE_IP"] = sn.NodeIp;
@@ -46,6 +55,57 @@ namespace OrderManagement.CustomeChart
             newRow["TASK_NUM"] = 0;
             dt.Rows.Add(newRow);
             DataBaseUtility.DataUpdate("SERVERNODE", dt);
+            //dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
+            //dgvServerNode.DataSource = getListFromdt(dt);
+            return true;
+        }
+
+
+
+        public void DeleteSeverNode()
+        {
+            if (dgvServerNode.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请先选中节点","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+            if (dgvServerNode.SelectedRows.Count == 1)
+            {
+                DataGridViewRow dgvr = dgvServerNode.SelectedRows[0];
+                ServerNode co = (ServerNode)dgvr.DataBoundItem;
+                DataTable dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
+                int i = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row["NODE_IP"].ToString().Equals(co.NodeIp))
+                    {
+                        dt.Rows[i].Delete();
+                        //break;
+                    }
+                    i++;
+                }
+                dt.AcceptChanges();
+                dgvr.DataGridView.DataSource = getListFromdt(dt);
+                DataBaseUtility.DataDelete("SERVERNODE", "NODE_IP", co.NodeIp);
+            }
+        }
+
+        private　List<ServerNode> getListFromdt(DataTable dt)
+        {
+            List<ServerNode> serverNodeList = new List<ServerNode>();
+            foreach (DataRow row in dt.Rows)
+            {
+                ServerNode co = new ServerNode();
+                co.Id = int.Parse(row["ID"].ToString());
+                co.NodeName = row["NODE_NAME"].ToString();
+                co.NodeIp = row["NODE_IP"].ToString();
+                co.Port = int.Parse(row["NODE_PORT"].ToString());
+                co.Status = row["NODE_STATUS"].ToString();
+                co.TaskNum = int.Parse(row["TASK_NUM"].ToString());
+                serverNodeList.Add(co);
+            }
+
+            return serverNodeList;
         }
 
         public void getServerInfo()

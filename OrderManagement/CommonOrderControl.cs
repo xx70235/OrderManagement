@@ -81,6 +81,58 @@ namespace OrderManagement
             }
         }
 
+        public void downloadDataToLocal()
+        {
+            //ThematicTaskStatus to = null;
+            string locaPath = null;
+            string remoteFile;
+            if (dgv_CommonOrder == null)
+            {
+                MessageBox.Show("请先获取共性需求列表，并选中完成生产的共性产品需求","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+            if (dgv_CommonOrder.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请先选中完成生产的共性产品需求","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+            if (dgv_CommonOrder.SelectedRows.Count == 1)
+            {
+                DataGridViewRow dgvr = dgv_CommonOrder.SelectedRows[0];
+                //to = (ThematicTaskStatus)dgvr.DataBoundItem;
+                //updateCurrentModelName(to);
+                //List<OutputParameter> outList = QueryOutputParameterInNeed(currentProductName);
+                //if (to != null)
+
+                 CommonOrder co = (CommonOrder)dgvr.DataBoundItem;
+                {
+                    if (co.Status.Contains("已完成") )
+                    {
+                        System.Windows.Forms.FolderBrowserDialog folderSave = new System.Windows.Forms.FolderBrowserDialog();
+                        if (folderSave.ShowDialog() == DialogResult.OK)
+                        {
+                            locaPath = folderSave.SelectedPath;
+                            //测试路径
+                            string btnOutFile = @"C:\测试数据\03-生态环境问题\02-荒漠化指数\input\NDVI.tif";
+                            remoteFile = FtpHelper.ftpPath + btnOutFile.Substring(btnOutFile.LastIndexOf("\\") + 1);
+                            string ftpPath = remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1);
+                            string fileName = remoteFile.Substring(remoteFile.LastIndexOf("/") + 1);
+                            FtpHelper.Instance.DownloadMultiple(FtpHelper.userId, FtpHelper.pwd, remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1), locaPath, remoteFile.Substring(remoteFile.LastIndexOf("/") + 1));
+                            MessageBox.Show("下载成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("共性产品生产尚未完成，请稍后尝试下载");
+                    }
+
+                }
+            }
+
+
+        }
+
+
         private void dgv_thematicOrder_CellPainting(object sender, System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
         {
 
@@ -167,7 +219,30 @@ namespace OrderManagement
                     row["LASTUPDATEDAT"] = dgvr.Cells[8].Value;
                 }
                 DataBaseUtility.DataUpdate("GXORDER", dt);
+                dt = DataBaseUtility.DataSelect("select * from GXORDER");
+                dgvr.DataGridView.DataSource = getListFromdt(dt);
             }
+        }
+
+        private List<CommonOrder> getListFromdt(DataTable dt)
+        {
+            List<CommonOrder> commonOrderList = new List<CommonOrder>();
+            foreach (DataRow row in dt.Rows)
+            {
+                CommonOrder co = new CommonOrder();
+                co.Orderid = row["COMM_ORDER_ID"].ToString();
+                co.ProductName = row["PRODUCTNAME"].ToString();
+                co.ProductType = row["PRODUCTTYPE"].ToString();
+                co.CoverScope = row["COVERSCOPE"].ToString();
+                co.StartDate = row["STARTDATE"].ToString();
+                co.EndDate = row["ENDDATE"].ToString();
+                co.OrderDate = row["CREATEDAT"].ToString();
+                co.UpdateDate = row["LASTUPDATEDAT"].ToString();
+                co.Status = row["STATUS"].ToString();
+                commonOrderList.Add(co);
+            }
+
+            return commonOrderList;
         }
 
         private void dgv_CommonOrder_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

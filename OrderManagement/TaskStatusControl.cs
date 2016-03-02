@@ -205,8 +205,8 @@ namespace OrderManagement
             catch (Exception ef)
             {
                 MessageBox.Show("服务调用失败，请检查数据：" + ef);
-
             }
+
             finally {
                 if (info==null)
                 {

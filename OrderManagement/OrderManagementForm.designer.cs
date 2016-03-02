@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementForm));
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -101,6 +101,7 @@
             this.btTaskConfig = new DevExpress.XtraBars.BarButtonItem();
             this.btProduce = new DevExpress.XtraBars.BarButtonItem();
             this.bt_downloadResultImg = new DevExpress.XtraBars.BarButtonItem();
+            this.btDeleteNode = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -159,8 +160,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemDateEdit1.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit1.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
-            this.repositoryItemDateEdit1.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
             // 
             // repositoryItemDateEdit2
@@ -170,8 +169,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemDateEdit2.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit2.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
-            this.repositoryItemDateEdit2.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.repositoryItemDateEdit2.Name = "repositoryItemDateEdit2";
             // 
             // repositoryItemDateEdit3
@@ -181,8 +178,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemDateEdit3.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit3.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
-            this.repositoryItemDateEdit3.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.repositoryItemDateEdit3.Name = "repositoryItemDateEdit3";
             // 
             // repositoryItemTextEdit2
@@ -262,10 +257,11 @@
             this.btViewTaskList,
             this.btTaskConfig,
             this.btProduce,
-            this.bt_downloadResultImg});
+            this.bt_downloadResultImg,
+            this.btDeleteNode});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 98;
+            this.ribbonControl1.MaxItemId = 99;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -283,9 +279,9 @@
             this.bt_OrderQuery.Id = 1;
             this.bt_OrderQuery.Name = "bt_OrderQuery";
             this.bt_OrderQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem3.Text = "订单查询";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            this.bt_OrderQuery.SuperTip = superToolTip3;
+            toolTipTitleItem1.Text = "订单查询";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.bt_OrderQuery.SuperTip = superToolTip1;
             this.bt_OrderQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOrderQuery_ItemClick);
             // 
             // bt_TpOrderGet
@@ -741,6 +737,15 @@
             this.bt_downloadResultImg.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.bt_downloadResultImg.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bt_downloadResultImg_ItemClick);
             // 
+            // btDeleteNode
+            // 
+            this.btDeleteNode.Caption = "删除节点";
+            this.btDeleteNode.Glyph = global::OrderManagement.Properties.Resources.Gnome_Network_Error_32;
+            this.btDeleteNode.Id = 98;
+            this.btDeleteNode.Name = "btDeleteNode";
+            this.btDeleteNode.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btDeleteNode.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btDeleteNode_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -782,7 +787,6 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem10);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "数据操作";
-            this.ribbonPageGroup3.Visible = false;
             // 
             // ribbonPage2
             // 
@@ -799,6 +803,7 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.tbServerPort);
             this.ribbonPageGroup4.ItemLinks.Add(this.btAddSever);
             this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btDeleteNode);
             this.ribbonPageGroup4.ItemLinks.Add(this.btGetMonitInfo);
             this.ribbonPageGroup4.ItemLinks.Add(this.btTaskStatus);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
@@ -876,9 +881,9 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem4.Text = "订单查询";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.barButtonItem1.SuperTip = superToolTip4;
+            toolTipTitleItem2.Text = "订单查询";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.barButtonItem1.SuperTip = superToolTip2;
             // 
             // dockManager
             // 
@@ -925,9 +930,7 @@
             // 
             this.repositoryItemTimeEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemTimeEdit1.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
             this.repositoryItemTimeEdit1.Name = "repositoryItemTimeEdit1";
-            this.repositoryItemTimeEdit1.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             // 
             // OrderManagementForm
             // 
@@ -1050,6 +1053,7 @@
         private DevExpress.XtraBars.BarButtonItem btProduce;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
         private DevExpress.XtraBars.BarButtonItem bt_downloadResultImg;
+        private DevExpress.XtraBars.BarButtonItem btDeleteNode;
         //private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         //private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
        

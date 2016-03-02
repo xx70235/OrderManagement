@@ -90,10 +90,10 @@ namespace OrderManagement
                 co.EndDate = to.EndDate;
 
 
-                co.EnglishName = dataNameMap.GetCommonEnglishName(co.ProductName); ;
-                co.ProductType = dataNameMap.GetCommonCategory(co.ProductName); ;
+                co.EnglishName = dataNameMap.GetCommonEnglishName(co.ProductName) ;
+                co.ProductType = dataNameMap.GetCommonCategory(co.ProductName); 
                 //TODO:查找数据库，找出该数据是否在库
-                co.IsInDataBase = false;
+                co.IsInDataBase = true;
                 commonListTmp.Add(co);
                 if (co.IsInDataBase == false)
                 {

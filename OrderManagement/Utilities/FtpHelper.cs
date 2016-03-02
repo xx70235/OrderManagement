@@ -260,6 +260,10 @@ namespace OrderManagement.Utilities
                     }                   
                 }         
             }
+            catch(NullReferenceException ex1)
+            {
+
+            }
             catch (Exception ex)
             {
                 throw ex;
