@@ -787,6 +787,10 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem10);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "数据操作";
+<<<<<<< HEAD
+=======
+            this.ribbonPageGroup3.Visible = false;
+>>>>>>> origin/master
             // 
             // ribbonPage2
             // 

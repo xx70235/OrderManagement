@@ -260,10 +260,13 @@ namespace OrderManagement.Utilities
                     }                   
                 }         
             }
+<<<<<<< HEAD
             catch(NullReferenceException ex1)
             {
 
             }
+=======
+>>>>>>> origin/master
             catch (Exception ex)
             {
                 throw ex;

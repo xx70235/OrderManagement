@@ -24,7 +24,11 @@ namespace OrderManagement.CustomeChart
             this.webBrowser1.Navigate("http://10.0.0.25:8085/");
         }
 
+<<<<<<< HEAD
         public bool AddServerNode(string name, string ip, int port)
+=======
+        public void AddServerNode(string name, string ip, int port)
+>>>>>>> origin/master
         {
             ServerNode sn = new ServerNode();
             sn.NodeIp = ip;
@@ -40,12 +44,17 @@ namespace OrderManagement.CustomeChart
             DataTable dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
             foreach(DataRow row in dt.Rows)
             {
+<<<<<<< HEAD
                 if (row["NODE_IP"].ToString().Equals(ip) || row["NODE_NAME"].ToString().Equals(name))
                 { 
                     MessageBox.Show("该主机已列入监控，请勿重复添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
 
+=======
+                if(row["NODE_IP"].ToString().Equals(ip))
+                    MessageBox.Show("该主机已列入监控，请勿重复添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+>>>>>>> origin/master
             }
             DataRow newRow = dt.NewRow();
             newRow["NODE_NAME"] = sn.NodeName;
@@ -55,6 +64,7 @@ namespace OrderManagement.CustomeChart
             newRow["TASK_NUM"] = 0;
             dt.Rows.Add(newRow);
             DataBaseUtility.DataUpdate("SERVERNODE", dt);
+<<<<<<< HEAD
             //dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
             //dgvServerNode.DataSource = getListFromdt(dt);
             return true;
@@ -62,11 +72,19 @@ namespace OrderManagement.CustomeChart
 
 
 
+=======
+        }
+
+>>>>>>> origin/master
         public void DeleteSeverNode()
         {
             if (dgvServerNode.SelectedRows.Count == 0)
             {
+<<<<<<< HEAD
                 MessageBox.Show("请先选中节点","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+=======
+                MessageBox.Show("请先选中欲解析的共性产品需求","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+>>>>>>> origin/master
                 return;
             }
             if (dgvServerNode.SelectedRows.Count == 1)
