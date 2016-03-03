@@ -11,8 +11,11 @@ using DevExpress.XtraBars.Docking;
 using System.Windows.Forms;
 using OrderManagement.Model;
 using GMap.NET.WindowsForms;
+<<<<<<< HEAD
+=======
 using System.Threading;
 
+>>>>>>> origin/master
 
 namespace OrderManagement
 {
@@ -82,6 +85,8 @@ namespace OrderManagement
             }
         }
 
+<<<<<<< HEAD
+=======
 
         public void PublishThematicData()
         {
@@ -115,6 +120,7 @@ namespace OrderManagement
         }
 
 
+>>>>>>> origin/master
         private void dgv_thematicOrder_CellPainting(object sender, System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
         {
 

@@ -567,7 +567,11 @@
     <None Include="Resources\Gnome-Go-Down-32.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <None Include="Resources\Gnome-Document-Revert-32.png" />
+=======
     <None Include="Resources\Gnome-Network-Error-32.png" />
+>>>>>>> origin/master
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

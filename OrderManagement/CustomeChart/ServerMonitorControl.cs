@@ -24,8 +24,12 @@ namespace OrderManagement.CustomeChart
             this.webBrowser1.Navigate("http://10.0.0.25:8085/");
         }
 
+<<<<<<< HEAD
+        public void AddServerNode(string name, string ip, int port)
+=======
 
         public bool AddServerNode(string name, string ip, int port)
+>>>>>>> origin/master
         {
             ServerNode sn = new ServerNode();
             sn.NodeIp = ip;
@@ -39,6 +43,8 @@ namespace OrderManagement.CustomeChart
             else
                 sn.Status = "在线";
             DataTable dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
+<<<<<<< HEAD
+=======
             foreach(DataRow row in dt.Rows)
             {
 
@@ -49,6 +55,7 @@ namespace OrderManagement.CustomeChart
                 }
 
             }
+>>>>>>> origin/master
             DataRow newRow = dt.NewRow();
             newRow["NODE_NAME"] = sn.NodeName;
             newRow["NODE_IP"] = sn.NodeIp;
@@ -57,6 +64,8 @@ namespace OrderManagement.CustomeChart
             newRow["TASK_NUM"] = 0;
             dt.Rows.Add(newRow);
             DataBaseUtility.DataUpdate("SERVERNODE", dt);
+<<<<<<< HEAD
+=======
 
             //dt = DataBaseUtility.DataSelect("select * from SERVERNODE");
             //dgvServerNode.DataSource = getListFromdt(dt);
@@ -112,6 +121,7 @@ namespace OrderManagement.CustomeChart
             }
 
             return serverNodeList;
+>>>>>>> origin/master
         }
 
         public void getServerInfo()

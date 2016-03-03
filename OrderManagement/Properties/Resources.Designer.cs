@@ -63,9 +63,15 @@ namespace OrderManagement.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+<<<<<<< HEAD
+        internal static System.Drawing.Bitmap Gnome_Document_Revert_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Document-Revert-32", resourceCulture);
+=======
         internal static System.Drawing.Bitmap Gnome_Go_Down_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Go-Down-32", resourceCulture);
+>>>>>>> origin/master
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +79,15 @@ namespace OrderManagement.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+<<<<<<< HEAD
+        internal static System.Drawing.Bitmap Gnome_Go_Down_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Go-Down-32", resourceCulture);
+=======
         internal static System.Drawing.Bitmap Gnome_Logviewer_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Logviewer-32", resourceCulture);
+>>>>>>> origin/master
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +95,15 @@ namespace OrderManagement.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+<<<<<<< HEAD
+        internal static System.Drawing.Bitmap Gnome_Logviewer_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Logviewer-32", resourceCulture);
+=======
         internal static System.Drawing.Bitmap Gnome_Media_Playback_Start_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Media-Playback-Start-32", resourceCulture);
+>>>>>>> origin/master
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +111,15 @@ namespace OrderManagement.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+<<<<<<< HEAD
+        internal static System.Drawing.Bitmap Gnome_Media_Playback_Start_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Media-Playback-Start-32", resourceCulture);
+=======
         internal static System.Drawing.Bitmap Gnome_Network_Error_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Network-Error-32", resourceCulture);
+>>>>>>> origin/master
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -81,6 +81,8 @@ namespace OrderManagement
             }
         }
 
+<<<<<<< HEAD
+=======
         public void downloadDataToLocal()
         {
             //ThematicTaskStatus to = null;
@@ -133,6 +135,7 @@ namespace OrderManagement
         }
 
 
+>>>>>>> origin/master
         private void dgv_thematicOrder_CellPainting(object sender, System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
         {
 
@@ -219,6 +222,9 @@ namespace OrderManagement
                     row["LASTUPDATEDAT"] = dgvr.Cells[8].Value;
                 }
                 DataBaseUtility.DataUpdate("GXORDER", dt);
+<<<<<<< HEAD
+            }
+=======
                 dt = DataBaseUtility.DataSelect("select * from GXORDER");
                 dgvr.DataGridView.DataSource = getListFromdt(dt);
             }
@@ -243,6 +249,7 @@ namespace OrderManagement
             }
 
             return commonOrderList;
+>>>>>>> origin/master
         }
 
         private void dgv_CommonOrder_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

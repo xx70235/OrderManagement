@@ -22,8 +22,11 @@ using System.Diagnostics;
 using System.Reflection;
 using DevExpress.XtraBars;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 using System.Threading;
 =======
+>>>>>>> origin/master
 >>>>>>> origin/master
 
 
@@ -91,12 +94,15 @@ namespace OrderManagement
                 {
                     string queryParam = tpQuery.GenerateQueryParam(cb_dataCategory.EditValue.ToString(), sd.ToString("yyyy-MM-dd"), ed.ToString("yyyy-MM-dd"));
                     string queryResult = tpQuery.ExcuteQuery(queryParam);
+<<<<<<< HEAD
+=======
 
                     if(queryResult == null)
                     {
                         return;
                     }
 
+>>>>>>> origin/master
                     DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER");
                     DataTable dt2 = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS");
                     //根据订单编号移除已存在订单
@@ -172,9 +178,13 @@ namespace OrderManagement
             }
             catch (NullReferenceException e1)
             {
+<<<<<<< HEAD
+                MessageBox.Show("请输入查询参数");
+=======
 
                 MessageBox.Show("请输入查询参数", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
             }
         }
 
@@ -274,9 +284,13 @@ namespace OrderManagement
 
             gMap.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
 
+<<<<<<< HEAD
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+=======
 
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
 
+>>>>>>> origin/master
             gMap.Overlays.Add(polygons);
             gMap.Overlays.Add(objects);
             currentMarker = new GMarkerGoogle(gMap.Position, GMarkerGoogleType.arrow);
@@ -336,9 +350,13 @@ namespace OrderManagement
             this.commonOrderList = new List<CommonOrder>();
             if (dt == null)
             {
+<<<<<<< HEAD
+                MessageBox.Show("查询未返回结果");
+=======
 
                 MessageBox.Show("查询未返回结果", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
                 return;
             }
             foreach(DataRow row in dt.Rows)
@@ -426,9 +444,13 @@ namespace OrderManagement
                     List<ThematicOrder> thematicOrderList = new List<ThematicOrder>();
                     if (dt == null)
                     {
+<<<<<<< HEAD
+                        MessageBox.Show("查询未返回结果");
+=======
 
                         MessageBox.Show("查询未返回结果", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
                         return;
                     }
                     foreach (DataRow row in dt.Rows)
@@ -480,9 +502,13 @@ namespace OrderManagement
             }
             catch (NullReferenceException e1)
             {
+<<<<<<< HEAD
+                MessageBox.Show("请输入查询参数");
+=======
 
                 MessageBox.Show("请输入查询参数", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
             }
         }
 
@@ -515,9 +541,13 @@ namespace OrderManagement
             }
             else
             {
+<<<<<<< HEAD
+                MessageBox.Show("请先查看共性产品需求，并选中需更新状态的需求订单");
+=======
 
                 MessageBox.Show("请先查看共性产品需求，并选中需更新状态的需求订单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
             }
         }
         
@@ -530,9 +560,13 @@ namespace OrderManagement
             }
             else
             {
+<<<<<<< HEAD
+                MessageBox.Show("请先获取订单，并选中需解析的订单");
+=======
 
                 MessageBox.Show("请先获取订单，并选中需解析的订单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
             }
         }
 
@@ -542,6 +576,9 @@ namespace OrderManagement
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+<<<<<<< HEAD
+            MessageBox.Show("暂无测试数据，等待课题3跟进");
+=======
 
             if(this.coc==null)
             {
@@ -552,10 +589,14 @@ namespace OrderManagement
                 this.coc.downloadDataToLocal();
             }
 
+>>>>>>> origin/master
         }
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+<<<<<<< HEAD
+            MessageBox.Show("该接口还有问题");
+=======
 
             if(this.thematicOrderControl==null)
             {
@@ -568,6 +609,7 @@ namespace OrderManagement
                 this.thematicOrderControl.PublishThematicData();
             }
 
+>>>>>>> origin/master
         }
 
         private void btGetMonitInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -591,9 +633,13 @@ namespace OrderManagement
             }
             else
             {
+<<<<<<< HEAD
+                MessageBox.Show("请先查看节点列表，并选中某一生产节点");
+=======
 
                 MessageBox.Show("请先查看节点列表，并选中某一生产节点","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
 
+>>>>>>> origin/master
             }
 
             //ServerMonitorControl smc = new ServerMonitorControl();
@@ -608,6 +654,16 @@ namespace OrderManagement
 
         private void btAddSever_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+<<<<<<< HEAD
+            try { 
+            this.smc = new ServerMonitorControl();
+            this.smc.AddServerNode(tbServerName.EditValue.ToString(), tbServerAddr.EditValue.ToString(), int.Parse(tbServerPort.EditValue.ToString()));
+            showServerMonitorControl();
+            //将节点添加到数据库或配置文件中
+            MessageBox.Show("添加成功，点击节点状态查看节点情况。");
+                }
+            catch(NullReferenceException e1)
+=======
 
             try
             {
@@ -622,6 +678,7 @@ namespace OrderManagement
             }
             catch (NullReferenceException e1)
 
+>>>>>>> origin/master
             {
                 MessageBox.Show("请将节点信息填写完整");
             }
@@ -878,7 +935,11 @@ namespace OrderManagement
             dp.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))); new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))); new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dp.Width = 600;
 
+<<<<<<< HEAD
+            DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where STATUS_SECTION ='等待生产队列' OR STATUS_SECTION ='生产中' ");
+=======
             DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where STATUS_SECTION ='等待生产队列' ");
+>>>>>>> origin/master
             List<ThematicTaskStatus> thematicTaskStatusList = new List<ThematicTaskStatus>();
             if (dt == null)
             {
@@ -1007,15 +1068,23 @@ namespace OrderManagement
         {            
             if (this.tsc != null)
             {
+<<<<<<< HEAD
+                this.tsc.downloadDataToLocal(); ;
+            }
+=======
 
                 this.tsc.downloadDataToLocal();             }
 
+>>>>>>> origin/master
             else
             {
                 MessageBox.Show("请先获取生产队列，再选择已生产完成的订单");
             }
         }
 
+<<<<<<< HEAD
+       
+=======
         private void btDeleteNode_ItemClick(object sender, ItemClickEventArgs e)
         {
 
@@ -1030,6 +1099,7 @@ namespace OrderManagement
             }
         }
 
+>>>>>>> origin/master
       
     }
 

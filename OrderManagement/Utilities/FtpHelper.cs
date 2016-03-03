@@ -260,12 +260,53 @@ namespace OrderManagement.Utilities
                     }                   
                 }         
             }
+<<<<<<< HEAD
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DownloadDir(string userId, string pwd, string ftpPath, string filePath)
+        {
+            FtpWebRequest reqFTP;
+            try
+            {
+                string[] fileNames = GetFilePath(userId, pwd, ftpPath);
+                
+                foreach (var item in fileNames)
+                {                    
+                        FileStream outputStream = new FileStream(filePath + "\\" + item, FileMode.Create);
+                        reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpPath + item));
+                        reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
+                        reqFTP.UseBinary = true;
+                        reqFTP.Credentials = new NetworkCredential(userId, pwd);
+                        reqFTP.UsePassive = false;
+                        FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
+                        Stream ftpStream = response.GetResponseStream();
+                        long cl = response.ContentLength;
+                        int bufferSize = 2048;
+                        int readCount;
+                        byte[] buffer = new byte[bufferSize];
+                        readCount = ftpStream.Read(buffer, 0, bufferSize);
+                        while (readCount > 0)
+                        {
+                            outputStream.Write(buffer, 0, readCount);
+                            readCount = ftpStream.Read(buffer, 0, bufferSize);
+                        }
+                        ftpStream.Close();
+                        outputStream.Close();
+                        response.Close();                    
+                }
+            }
+=======
 
             catch(NullReferenceException ex1)
             {
 
             }
 
+>>>>>>> origin/master
             catch (Exception ex)
             {
                 throw ex;
