@@ -826,7 +826,7 @@ namespace OrderManagement
             dp.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))); new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))); new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dp.Width = 600;
 
-            DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where STATUS_SECTION ='等待生产队列' ");
+            DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where STATUS_SECTION ='等待生产队列' OR STATUS_SECTION ='生产中' ");
             List<ThematicTaskStatus> thematicTaskStatusList = new List<ThematicTaskStatus>();
             if (dt == null)
             {
@@ -963,6 +963,7 @@ namespace OrderManagement
             }
         }
 
+       
       
     }
 

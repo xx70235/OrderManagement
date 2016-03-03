@@ -98,6 +98,7 @@ namespace OrderManagement
                 ThematicTaskStatus to = (ThematicTaskStatus)dgvr.DataBoundItem;
                 this.topForm.ShowSelectedOrderInMap(to.ThematicId,to);
                 currentTaskStatus = to;
+                updateCurrentModelName(currentTaskStatus);
             }
         }
         
@@ -151,37 +152,12 @@ namespace OrderManagement
                     serverNodeIp = to.NodeIp;
                     currentServiceUrl = currentServiceUrl.Replace("202.205.84.114", serverNodeIp);
                     changeStatusControlAndMap(to, "生产中", "");
+                    updateServerNode(to,"生产");
                     dynamicCall(to, currentServiceUrl, xml);
 
                     //MessageBox.Show("当前调用XML信息为：" + xml);                
                 }
-            }
-
-            //EcoSystemServices.EcoSystemServicesClient client = new EcoSystemServices.EcoSystemServicesClient();
-            //int start = System.Environment.TickCount;
-
-
-
-            ////string mgx1 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\input\BEIJJING_2000M01S01_NPP.TIF";
-            ////string mgx2 = @"C:\服务部署环境\863模型-20150419\Config\0测试数据\数据\数据\03-问题要素\04-生态系统敏感性指数\output\2000敏感性专题.tif";
-            //int end = 0;
-            //string info = null;
-            //IAsyncResult ar = null;
-            //string xmlContent = xml;
-            //xmlContent = System.IO.File.ReadAllText(@"C:\\荒漠化指数.xml");
-            ////MessageBox.Show("XML内容：" + xmlContent);
-            //MessageBox.Show("已提交任务到服务器，开始生产");
-            //ar = client.BeginModel_Invoke(xmlContent, delegate
-            //{
-            //    //回调方法体
-            //    end = System.Environment.TickCount;
-            //    info = client.EndModel_Invoke(ar);
-            //    //string currentResult = "生态系统敏感性指数服务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s(精确到ms)";                
-            //    MessageBox.Show("当前任务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s(精确到ms)");
-                
-            //}, new object());
-            //Console.ReadLine();
-            
+            }                       
         }
         public  string dynamicCall(ThematicTaskStatus to  ,string url, string xmlContent)
         {
@@ -195,31 +171,88 @@ namespace OrderManagement
                 IEcoSystemServices client = ServiceManager.CreateWCFServiceByURL<IEcoSystemServices>(url);
                 ar = client.BeginModel_Invoke(xmlContent, delegate
                 {
-                    end = System.Environment.TickCount;
                     info = client.EndModel_Invoke(ar);
+                    end = System.Environment.TickCount;                    
                     string currentResult = "服务计算结果：" + info + "\n耗时：" + (end - start) / 1000 + "s)";
+                    updateServerNode(to, "生产结束");
                     changeStatusControlAndMap(to, "生产完成", currentResult);
-                    //System.Windows.Forms.MessageBox.Show(currentResult);
+                    System.Windows.Forms.MessageBox.Show(currentResult);
                 }, new object());
             }
             catch (Exception ef)
             {
+                info = "Failed";
+                changeStatusControlAndMap(to, "生产失败", "");
                 MessageBox.Show("服务调用失败，请检查数据：" + ef);
-
             }
             finally {
                 if (info==null)
                 {
-                    info = "Failed";
+                    
                 }
            
             }
             return info;
         }
+        public void updateServerNode(ThematicTaskStatus to,string status) 
+        {
+            ServerNode node = null;
+            DataTable dt = DataBaseUtility.DataSelect("select * from SERVERNODE where NODE_NAME='" + to.NodeName + "'");
 
+            if (dt == null)
+            {
+                MessageBox.Show("不存在当前任务配置信息,请检查数据库!");
+                return ;
+            }            
+            if ("生产".Equals(status))
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    
+                    node = new ServerNode();
+                   
+                    int taskNum=0;
+                    try
+                    {
+                        int.TryParse(row["TASK_NUM"].ToString(), out taskNum);
+                    }
+                    catch (Exception)
+                    {                        
+                        throw;
+                    }
+
+                    row["TASK_NUM"] = taskNum+1;                   
+                }
+                DataBaseUtility.DataUpdate("SERVERNODE",dt);
+            }
+            else if ("生产结束".Equals(status))
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+
+                    node = new ServerNode();
+
+                    int taskNum = 0;
+                    try
+                    {
+                        int.TryParse(row["TASK_NUM"].ToString(), out taskNum);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+
+                    row["TASK_NUM"] = taskNum-1;
+                }
+                DataBaseUtility.DataUpdate("SERVERNODE", dt);
+            }
+            
+            
+        }
         private string constructAllTaskConfig(ThematicTaskStatus to)
         {
             ThematicOrder order = null;
+            string exeName = null;
             DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER where TASK_ORDER_ID='" + to.ThematicId + "'");
             List<ThematicOrder> thematicOrderList = new List<ThematicOrder>();
             if (dt == null)
@@ -241,9 +274,10 @@ namespace OrderManagement
                 order.CoverScope = row["LEFT_TOP_LON"].ToString() + "," + row["LEFT_TOP_LAT"].ToString() + "," + row["RIGHT_BOTTOM_LON"].ToString() + "," + row["RIGHT_BOTTOM_LAT"].ToString();                
             }
             currentProductName = order.ProductName;
+            exeName = getExeNameFromProductName(currentProductName);
             List<InputParameter> taskInputInNeed = QueryInputParameterInNeed(currentProductName);
             List<OutputParameter> taskOutputInNeed = QueryOutputParameterInNeed(currentProductName);
-            string xmlContent = constructInvokeXml(taskInputInNeed, taskOutputInNeed,currentProductName); 
+            string xmlContent = constructInvokeXml(taskInputInNeed, taskOutputInNeed, exeName); 
             return xmlContent;
         
         }
@@ -274,7 +308,7 @@ namespace OrderManagement
             return currentProductName;
         }
 
-        private string constructInvokeXml(List<InputParameter> taskInputInNeed, List<OutputParameter> taskOutputInNeed, string productName)
+        private string constructInvokeXml(List<InputParameter> taskInputInNeed, List<OutputParameter> taskOutputInNeed, string exeName)
         {
             Dictionary<string, string> dicValue = new Dictionary<string, string>();
             Dictionary<string, string> dicAliasName = new Dictionary<string, string>();
@@ -319,7 +353,7 @@ namespace OrderManagement
             
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            stringBuilder.AppendLine(string.Format("<GeneralArgsConfig FunctionName=\"{0}\" Category=\"{1}\">", productName, "格局要素"));
+            stringBuilder.AppendLine(string.Format("<GeneralArgsConfig FunctionName=\"{0}\" Category=\"{1}\">", exeName, "格局要素"));
             stringBuilder.AppendLine("<fileArg>");
             foreach (string current2 in list1)
             {
@@ -350,7 +384,7 @@ namespace OrderManagement
             if ("生产中".Equals(status))
             {
                 to.TaskStatus = OrderStatus.生产中;
-                to.StatusDes = "已进入生产队列，正在生产中" + extraInfo;
+                to.StatusDes = "已进入生产队列，正在生产中:" + extraInfo;
                 
                 DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where TASK_ORDER_ID='" + to.ThematicId + "'");               
                 if (dt == null)
@@ -361,7 +395,7 @@ namespace OrderManagement
                 foreach (DataRow row in dt.Rows)
                 {
                     row["STATUS_SECTION"] = to.TaskStatus.ToString();                    
-                    row["STATUS_DESC"] = to.StatusDes+";"+extraInfo;                   
+                    row["STATUS_DESC"] = to.StatusDes;                   
                 }
                 DataBaseUtility.DataUpdate("TASK_ORDER_STATUS",dt);
                 //修改前端地图控件颜色
@@ -372,7 +406,7 @@ namespace OrderManagement
             if ("生产完成".Equals(status))
             {
                 to.TaskStatus = OrderStatus.生产完成;
-                to.StatusDes = "已生产完成，可下载结果数据到本地" + extraInfo;                
+                to.StatusDes = "已生产完成，可下载结果数据到本地;" + extraInfo;                
                 DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where TASK_ORDER_ID='" + to.ThematicId + "'");
                 if (dt == null)
                 {
@@ -382,18 +416,50 @@ namespace OrderManagement
                 foreach (DataRow row in dt.Rows)
                 {
                     row["STATUS_SECTION"] = to.TaskStatus.ToString();
-                    row["STATUS_DESC"] = to.StatusDes + ";" + extraInfo;
+                    row["STATUS_DESC"] = to.StatusDes;
                 }
                 DataBaseUtility.DataUpdate("TASK_ORDER_STATUS", dt);
                 //修改前端地图控件颜色                
                 
             }
+            if ("生产失败".Equals(status))
+            {
+                to.TaskStatus = OrderStatus.生产失败;
+                to.StatusDes = "生产失败，请检查数据并重新尝试:" + extraInfo;
+                DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS where TASK_ORDER_ID='" + to.ThematicId + "'");
+                if (dt == null)
+                {
+                    MessageBox.Show("不存在当前任务配置信息,请检查数据库!");
+                    return;
+                }
+                foreach (DataRow row in dt.Rows)
+                {
+                    row["STATUS_SECTION"] = to.TaskStatus.ToString();
+                    row["STATUS_DESC"] = to.StatusDes;
+                }
+                DataBaseUtility.DataUpdate("TASK_ORDER_STATUS", dt);
+                //修改前端地图控件颜色                
+
+            }
             //throw new NotImplementedException();
         }
-        private List<InputParameter> QueryInputParameterInNeed(string productName)
+        private string getExeNameFromProductName(string productName) 
         {
-           
-
+            string exeName=null;
+            DataTable dt = DataBaseUtility.DataSelect("select * from MODELINFOMANAGEMENT where MODEL_NAME='" + productName + "'");            
+            if (dt == null)
+            {
+                MessageBox.Show("查询未返回结果,请检查数据库!");
+                return null;
+            }
+            foreach (DataRow row in dt.Rows)
+            {                
+                exeName = row["MODEL_DESCRIPTION"].ToString();                
+            }
+            return exeName;
+        }
+        private List<InputParameter> QueryInputParameterInNeed(string productName)
+        {           
             DataTable dt = DataBaseUtility.DataSelect("select * from MODELINFOMANAGEMENT where MODEL_NAME='" + productName + "'");
             List<TaskModelInfo> modelList = new List<TaskModelInfo>();
             if (dt == null)
@@ -437,6 +503,26 @@ namespace OrderManagement
 
         private List<OutputParameter> QueryOutputParameterInNeed(string productName)
         {
+            DataTable dt = DataBaseUtility.DataSelect("select * from MODELINFOMANAGEMENT where MODEL_NAME='" + productName + "'");
+            List<TaskModelInfo> modelList = new List<TaskModelInfo>();
+            if (dt == null)
+            {
+                MessageBox.Show("查询未返回结果,请检查数据库!");
+                return null;
+            }
+            foreach (DataRow row in dt.Rows)
+            {
+                TaskModelInfo model = new TaskModelInfo();
+                model.Model_id = row["MODEL_ID"].ToString();
+                model.Model_name = row["MODEL_NAME"].ToString();
+                model.Model_url = row["MODEL_URL"].ToString();
+                this.currentServiceUrl = model.Model_url;
+                modelList.Add(model);
+            }
+            if (modelList[0].Model_id != null && !"".Equals(modelList[0].Model_id))
+            {
+                currentModel_id = modelList[0].Model_id;
+            }
             DataTable dt2 = null;
             if (currentModel_id != null && !"".Equals(currentModel_id))
             {
@@ -482,7 +568,8 @@ namespace OrderManagement
             {
                 DataGridViewRow dgvr = dgvTaskStatus.SelectedRows[0];
                 to = (ThematicTaskStatus)dgvr.DataBoundItem;
-                updateCurrentModelName(to);
+                //updateCurrentModelName(to);
+                //MessageBox.Show("当前模型名称："+currentProductName);
                List<OutputParameter> outList=QueryOutputParameterInNeed(currentProductName);
                 if (to != null)
                 {
@@ -492,12 +579,20 @@ namespace OrderManagement
                         if(folderSave.ShowDialog()==DialogResult.OK)
                          {
                              locaPath = folderSave.SelectedPath;
-                             string btnOutFile = outList[0].OutputPara_currentValue;
-                             remoteFile = FtpHelper.ftpPath + btnOutFile.Substring(btnOutFile.LastIndexOf("\\") + 1);
-                             string ftpPath = remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1);
-                             string fileName = remoteFile.Substring(remoteFile.LastIndexOf("/") + 1);
-                             FtpHelper.Instance.DownloadMultiple(FtpHelper.userId, FtpHelper.pwd, remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1), locaPath, remoteFile.Substring(remoteFile.LastIndexOf("/") + 1));
-                             MessageBox.Show("下载成功");
+                             string btnOutFile = outList[0].OutputPara_defaultValue;
+                             if (btnOutFile.EndsWith(".img")||btnOutFile.EndsWith(".shp")||btnOutFile.EndsWith(".tif"))//结果文件
+                             {
+                                 remoteFile = FtpHelper.ftpPath + btnOutFile.Substring(btnOutFile.LastIndexOf("\\") + 1);
+                                 string ftpPath = remoteFile.Substring(0, remoteFile.LastIndexOf("/") + 1);
+                                 string fileName = remoteFile.Substring(remoteFile.LastIndexOf("/") + 1);
+                                 FtpHelper.Instance.DownloadMultiple(FtpHelper.userId, FtpHelper.pwd, ftpPath, locaPath, fileName);
+                                 MessageBox.Show("下载成功，当前文件名称为：" + remoteFile);
+                             }
+                             else//结果目录
+                             {                                 
+                                 remoteFile = FtpHelper.ftpPath + btnOutFile.Substring(btnOutFile.LastIndexOf("\\") + 1);                                 
+                                 FtpHelper.Instance.DownloadDir(FtpHelper.userId, FtpHelper.pwd, remoteFile, locaPath);
+                             }                                                         
                           }                                                                                                                            
                     }
                     else
@@ -506,9 +601,7 @@ namespace OrderManagement
                     }
                     
                 }
-            }
-            
-            
+            }                        
         }
 
         private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)

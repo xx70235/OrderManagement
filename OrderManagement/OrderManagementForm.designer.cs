@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementForm));
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -265,7 +265,7 @@
             this.bt_downloadResultImg});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 98;
+            this.ribbonControl1.MaxItemId = 99;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -283,9 +283,9 @@
             this.bt_OrderQuery.Id = 1;
             this.bt_OrderQuery.Name = "bt_OrderQuery";
             this.bt_OrderQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem3.Text = "订单查询";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            this.bt_OrderQuery.SuperTip = superToolTip3;
+            toolTipTitleItem5.Text = "订单查询";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            this.bt_OrderQuery.SuperTip = superToolTip5;
             this.bt_OrderQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOrderQuery_ItemClick);
             // 
             // bt_TpOrderGet
@@ -876,9 +876,9 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem4.Text = "订单查询";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.barButtonItem1.SuperTip = superToolTip4;
+            toolTipTitleItem6.Text = "订单查询";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            this.barButtonItem1.SuperTip = superToolTip6;
             // 
             // dockManager
             // 
