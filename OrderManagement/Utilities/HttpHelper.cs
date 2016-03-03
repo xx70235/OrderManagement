@@ -32,11 +32,9 @@ namespace OrderManagement.Utilities
 
             //设置代理UserAgent和超时
             //request.UserAgent = userAgent;
-<<<<<<< HEAD
+
             request.Timeout = timeout;
-=======
-            //request.Timeout = timeout;
->>>>>>> origin/master
+
             if (cookies != null)
             {
                 request.CookieContainer = new CookieContainer();

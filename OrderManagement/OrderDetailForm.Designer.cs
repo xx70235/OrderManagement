@@ -531,10 +531,9 @@
             this.Name = "OrderDetailForm";
             this.ShowIcon = false;
             this.Text = "订单详情";
-<<<<<<< HEAD
+
             this.TopMost = true;
-=======
->>>>>>> origin/master
+
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_assistDataInNeed)).EndInit();

@@ -91,13 +91,12 @@ namespace OrderManagement
                 {
                     string queryParam = tpQuery.GenerateQueryParam(cb_dataCategory.EditValue.ToString(), sd.ToString("yyyy-MM-dd"), ed.ToString("yyyy-MM-dd"));
                     string queryResult = tpQuery.ExcuteQuery(queryParam);
-<<<<<<< HEAD
+
                     if(queryResult == null)
                     {
                         return;
                     }
-=======
->>>>>>> origin/master
+
                     DataTable dt = DataBaseUtility.DataSelect("select * from TASK_ORDER");
                     DataTable dt2 = DataBaseUtility.DataSelect("select * from TASK_ORDER_STATUS");
                     //根据订单编号移除已存在订单
@@ -173,11 +172,9 @@ namespace OrderManagement
             }
             catch (NullReferenceException e1)
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("请输入查询参数", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("请输入查询参数");
->>>>>>> origin/master
+
             }
         }
 
@@ -277,11 +274,9 @@ namespace OrderManagement
 
             gMap.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
 
-<<<<<<< HEAD
+
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-=======
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
->>>>>>> origin/master
+
             gMap.Overlays.Add(polygons);
             gMap.Overlays.Add(objects);
             currentMarker = new GMarkerGoogle(gMap.Position, GMarkerGoogleType.arrow);
@@ -341,11 +336,9 @@ namespace OrderManagement
             this.commonOrderList = new List<CommonOrder>();
             if (dt == null)
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("查询未返回结果", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("查询未返回结果");
->>>>>>> origin/master
+
                 return;
             }
             foreach(DataRow row in dt.Rows)
@@ -433,11 +426,9 @@ namespace OrderManagement
                     List<ThematicOrder> thematicOrderList = new List<ThematicOrder>();
                     if (dt == null)
                     {
-<<<<<<< HEAD
+
                         MessageBox.Show("查询未返回结果", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                        MessageBox.Show("查询未返回结果");
->>>>>>> origin/master
+
                         return;
                     }
                     foreach (DataRow row in dt.Rows)
@@ -489,11 +480,9 @@ namespace OrderManagement
             }
             catch (NullReferenceException e1)
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("请输入查询参数", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("请输入查询参数");
->>>>>>> origin/master
+
             }
         }
 
@@ -526,11 +515,9 @@ namespace OrderManagement
             }
             else
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("请先查看共性产品需求，并选中需更新状态的需求订单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("请先查看共性产品需求，并选中需更新状态的需求订单");
->>>>>>> origin/master
+
             }
         }
         
@@ -543,11 +530,9 @@ namespace OrderManagement
             }
             else
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("请先获取订单，并选中需解析的订单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("请先获取订单，并选中需解析的订单");
->>>>>>> origin/master
+
             }
         }
 
@@ -557,7 +542,7 @@ namespace OrderManagement
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-<<<<<<< HEAD
+
             if(this.coc==null)
             {
                 MessageBox.Show("请先查看共性需求列表，并选中完成生产的共性产品需求", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -566,14 +551,12 @@ namespace OrderManagement
             else{
                 this.coc.downloadDataToLocal();
             }
-=======
-            MessageBox.Show("暂无测试数据，等待课题3跟进");
->>>>>>> origin/master
+
         }
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-<<<<<<< HEAD
+
             if(this.thematicOrderControl==null)
             {
                 MessageBox.Show("请先获取专题产品订单列表，并选中已完成生产的专题产品订单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -584,9 +567,7 @@ namespace OrderManagement
             {
                 this.thematicOrderControl.PublishThematicData();
             }
-=======
-            MessageBox.Show("该接口还有问题");
->>>>>>> origin/master
+
         }
 
         private void btGetMonitInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -610,11 +591,9 @@ namespace OrderManagement
             }
             else
             {
-<<<<<<< HEAD
+
                 MessageBox.Show("请先查看节点列表，并选中某一生产节点","提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-=======
-                MessageBox.Show("请先查看节点列表，并选中某一生产节点");
->>>>>>> origin/master
+
             }
 
             //ServerMonitorControl smc = new ServerMonitorControl();
@@ -629,7 +608,7 @@ namespace OrderManagement
 
         private void btAddSever_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-<<<<<<< HEAD
+
             try
             {
                 this.smc = new ServerMonitorControl();
@@ -642,16 +621,7 @@ namespace OrderManagement
                 }
             }
             catch (NullReferenceException e1)
-=======
-            try { 
-            this.smc = new ServerMonitorControl();
-            this.smc.AddServerNode(tbServerName.EditValue.ToString(), tbServerAddr.EditValue.ToString(), int.Parse(tbServerPort.EditValue.ToString()));
-            showServerMonitorControl();
-            //将节点添加到数据库或配置文件中
-            MessageBox.Show("添加成功，点击节点状态查看节点情况。");
-                }
-            catch(NullReferenceException e1)
->>>>>>> origin/master
+
             {
                 MessageBox.Show("请将节点信息填写完整");
             }
@@ -1037,12 +1007,9 @@ namespace OrderManagement
         {            
             if (this.tsc != null)
             {
-<<<<<<< HEAD
+
                 this.tsc.downloadDataToLocal();             }
-=======
-                this.tsc.downloadDataToLocal(); ;
-            }
->>>>>>> origin/master
+
             else
             {
                 MessageBox.Show("请先获取生产队列，再选择已生产完成的订单");
