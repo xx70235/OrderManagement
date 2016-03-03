@@ -13,7 +13,7 @@ namespace OrderManagement.Utilities
         public Sensors TargetSensor { get; set; }
         public String GetMonitorResult(string ip)
         {
-           HttpWebResponse response = HttpHelper.CreateGetHttpResponse(@"http://"+ip+":8085/data.json", 5000, "", null);
+           HttpWebResponse response = HttpHelper.CreateGetHttpResponse(@"http://"+ip+":8085/data.json", 1000, "", null);
            if (response == null)
                return null;
            System.IO.StreamReader myreader = new System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8);

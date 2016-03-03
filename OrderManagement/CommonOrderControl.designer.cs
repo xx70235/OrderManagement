@@ -32,6 +32,12 @@ namespace OrderManagement
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_CommonOrder = new System.Windows.Forms.DataGridView();
+            this.cms_rightButton = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mi_CommonOrderStatusUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.mi_DataDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.commonOrderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.commonOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.thematicOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.orderidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,16 +47,9 @@ namespace OrderManagement
             this.orderDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isInDataBaseDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.commonOrderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.cms_rightButton = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mi_CommonOrderStatusUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mi_DataDownload = new System.Windows.Forms.ToolStripMenuItem();
-            this.commonOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.thematicOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CommonOrder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource1)).BeginInit();
             this.cms_rightButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thematicOrderBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -78,8 +77,7 @@ namespace OrderManagement
             this.endDateDataGridViewTextBoxColumn,
             this.orderDateDataGridViewTextBoxColumn,
             this.statusDataGridViewTextBoxColumn,
-            this.UpdateDate,
-            this.isInDataBaseDataGridViewCheckBoxColumn});
+            this.UpdateDate});
             this.dgv_CommonOrder.DataSource = this.commonOrderBindingSource1;
             this.dgv_CommonOrder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_CommonOrder.Location = new System.Drawing.Point(0, 0);
@@ -90,6 +88,39 @@ namespace OrderManagement
             this.dgv_CommonOrder.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_thematicOrder_CellMouseDown);
             this.dgv_CommonOrder.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgv_thematicOrder_CellPainting);
             this.dgv_CommonOrder.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CommonOrder_RowHeaderMouseClick);
+            // 
+            // cms_rightButton
+            // 
+            this.cms_rightButton.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mi_CommonOrderStatusUpdate,
+            this.mi_DataDownload});
+            this.cms_rightButton.Name = "cms_rightButton";
+            this.cms_rightButton.Size = new System.Drawing.Size(147, 48);
+            // 
+            // mi_CommonOrderStatusUpdate
+            // 
+            this.mi_CommonOrderStatusUpdate.Name = "mi_CommonOrderStatusUpdate";
+            this.mi_CommonOrderStatusUpdate.Size = new System.Drawing.Size(146, 22);
+            this.mi_CommonOrderStatusUpdate.Text = "更新需求状态";
+            this.mi_CommonOrderStatusUpdate.Click += new System.EventHandler(this.tsmi_retriveOrder_Click);
+            // 
+            // mi_DataDownload
+            // 
+            this.mi_DataDownload.Name = "mi_DataDownload";
+            this.mi_DataDownload.Size = new System.Drawing.Size(146, 22);
+            this.mi_DataDownload.Text = "下载数据";
+            // 
+            // commonOrderBindingSource1
+            // 
+            this.commonOrderBindingSource1.DataSource = typeof(OrderManagement.Model.CommonOrder);
+            // 
+            // commonOrderBindingSource
+            // 
+            this.commonOrderBindingSource.DataSource = typeof(OrderManagement.Model.CommonOrder);
+            // 
+            // thematicOrderBindingSource
+            // 
+            this.thematicOrderBindingSource.DataSource = typeof(OrderManagement.Model.ThematicOrder);
             // 
             // orderidDataGridViewTextBoxColumn
             // 
@@ -145,45 +176,6 @@ namespace OrderManagement
             this.UpdateDate.HeaderText = "状态更新时间";
             this.UpdateDate.Name = "UpdateDate";
             // 
-            // isInDataBaseDataGridViewCheckBoxColumn
-            // 
-            this.isInDataBaseDataGridViewCheckBoxColumn.DataPropertyName = "IsInDataBase";
-            this.isInDataBaseDataGridViewCheckBoxColumn.HeaderText = "是否已下载";
-            this.isInDataBaseDataGridViewCheckBoxColumn.Name = "isInDataBaseDataGridViewCheckBoxColumn";
-            // 
-            // commonOrderBindingSource1
-            // 
-            this.commonOrderBindingSource1.DataSource = typeof(OrderManagement.Model.CommonOrder);
-            // 
-            // cms_rightButton
-            // 
-            this.cms_rightButton.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mi_CommonOrderStatusUpdate,
-            this.mi_DataDownload});
-            this.cms_rightButton.Name = "cms_rightButton";
-            this.cms_rightButton.Size = new System.Drawing.Size(147, 48);
-            // 
-            // mi_CommonOrderStatusUpdate
-            // 
-            this.mi_CommonOrderStatusUpdate.Name = "mi_CommonOrderStatusUpdate";
-            this.mi_CommonOrderStatusUpdate.Size = new System.Drawing.Size(146, 22);
-            this.mi_CommonOrderStatusUpdate.Text = "更新需求状态";
-            this.mi_CommonOrderStatusUpdate.Click += new System.EventHandler(this.tsmi_retriveOrder_Click);
-            // 
-            // mi_DataDownload
-            // 
-            this.mi_DataDownload.Name = "mi_DataDownload";
-            this.mi_DataDownload.Size = new System.Drawing.Size(146, 22);
-            this.mi_DataDownload.Text = "下载数据";
-            // 
-            // commonOrderBindingSource
-            // 
-            this.commonOrderBindingSource.DataSource = typeof(OrderManagement.Model.CommonOrder);
-            // 
-            // thematicOrderBindingSource
-            // 
-            this.thematicOrderBindingSource.DataSource = typeof(OrderManagement.Model.ThematicOrder);
-            // 
             // CommonOrderControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -192,8 +184,8 @@ namespace OrderManagement
             this.Name = "CommonOrderControl";
             this.Size = new System.Drawing.Size(1340, 234);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CommonOrder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource1)).EndInit();
             this.cms_rightButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commonOrderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thematicOrderBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -218,6 +210,5 @@ namespace OrderManagement
         private DataGridViewTextBoxColumn orderDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn UpdateDate;
-        private DataGridViewCheckBoxColumn isInDataBaseDataGridViewCheckBoxColumn;
     }
 }

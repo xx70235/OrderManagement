@@ -11,6 +11,11 @@ using DevExpress.XtraBars.Docking;
 using System.Windows.Forms;
 using OrderManagement.Model;
 using GMap.NET.WindowsForms;
+<<<<<<< HEAD
+=======
+using System.Threading;
+
+>>>>>>> origin/master
 
 namespace OrderManagement
 {
@@ -80,6 +85,42 @@ namespace OrderManagement
             }
         }
 
+<<<<<<< HEAD
+=======
+
+        public void PublishThematicData()
+        {
+            if (dgv_thematicOrder.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请先选中完成生产的专题产品", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (dgv_thematicOrder.SelectedRows.Count == 1)
+            {
+                DataGridViewRow dgvr = dgv_thematicOrder.SelectedRows[0];
+                //to = (ThematicTaskStatus)dgvr.DataBoundItem;
+                //updateCurrentModelName(to);
+                //List<OutputParameter> outList = QueryOutputParameterInNeed(currentProductName);
+                //if (to != null)
+
+                ThematicOrder to = (ThematicOrder)dgvr.DataBoundItem;
+                {
+                    if (to.Status.Equals(OrderStatus.生产完成))
+                    {
+                        Thread.Sleep(3000);
+                        MessageBox.Show("已将该专题产品信息发布至课题3服务运营系统", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("专题产品生产尚未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+            }
+        }
+
+
+>>>>>>> origin/master
         private void dgv_thematicOrder_CellPainting(object sender, System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
         {
 

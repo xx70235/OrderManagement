@@ -28,10 +28,10 @@ namespace OrderManagement.CustomMarkers
             {
                 if (status.TaskStatus == OrderStatus.生产中)
                 {
-                    Stroke = new Pen(Brushes.Yellow, 8);
+                    Stroke = new Pen(Brushes.Yellow, 5);
                 }else if (status.TaskStatus == OrderStatus.生产完成)
                 {
-                    Stroke = new Pen(Brushes.Green, 8);
+                    Stroke = new Pen(Brushes.Green, 5);
                 }else if (status.TaskStatus == OrderStatus.生产失败)
                 {
                     Stroke = new Pen(Brushes.Red, 8);

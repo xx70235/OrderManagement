@@ -260,6 +260,7 @@ namespace OrderManagement.Utilities
                     }                   
                 }         
             }
+<<<<<<< HEAD
             catch (Exception ex)
             {
                 throw ex;
@@ -298,6 +299,14 @@ namespace OrderManagement.Utilities
                         response.Close();                    
                 }
             }
+=======
+
+            catch(NullReferenceException ex1)
+            {
+
+            }
+
+>>>>>>> origin/master
             catch (Exception ex)
             {
                 throw ex;
